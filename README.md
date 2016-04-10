@@ -1,3 +1,3 @@
 # ComputerScience-Projects
 
-Here I will host my projects for computer science coursese at Loyola Univeristy Chicago. 
+Here I will host my final exam project for the computer science 170 course at Loyola Univeristy Chicago. 
