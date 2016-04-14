@@ -40,7 +40,7 @@ Torcher.checkForNightTime;
       return HP;
   }
     else {
-      return false; 
+      return false;
     }
 
 }
