@@ -11,16 +11,18 @@ public class Sarz {
   We could totally have the explanation in a text file and have the program
   read it out instead of having it all here.
   Last Edited, Riley 4/13/16 */
+
   public void premise(){
     System.out.println("Welcome to Sars++");
     System.out.println("The year is 4052. Planet Earth has become increasingly barren due to humans' exhaustion of her resources. You are one of a select few chosen to journey to new planets in search of resources that could sustain life. Sarz++ has shown promise, and having just landed, your mission will begin soon.");
     System.out.println("What is your name?");
     userName = keyboard.nextLine();
-    System.out.println("Welcome to Sarz++, " + userName + ". Press play to begin.");
-    //Play button which invokes sarz generation etc.
+    System.out.println("Welcome to Sarz++, " + userName);
+    //Set game to play
   }
   /* This is where the game is generated. Variables, including counters, will be
   initialized here. Item slots made, etc. */
+
   public void sarzGeneration(){
 
     //Counters & Variables (there will probably be more)
@@ -35,7 +37,7 @@ public class Sarz {
     hour = 1;
 
 
-    Sarz[] itemSlots = new Sarz[2];
+    Items[] itemSlots = new Items[2];
 
   }
   /* This is where the map is generated & items are hidden*/
@@ -43,19 +45,37 @@ public class Sarz {
     int row;
     int column;
 
-    Sarz[][] map = new Sarz[5][5];
+    //the map is of type item because everything in each location should be some type of item or enemy
+    Items[][] map = new Items[5][5];
 
-    //This is to generate plants. There may be a better way to do this than a for loop?
+    Items itemGenerator = new Items();
+
+    for (int i = 0; i < 5; i++){
+      for (int j = 0; j < 5; j++){
+        map[i][j] = new Items();
+      }
+    }
+
+    /*This is to generate plants. There may be a better way to do this than a for loop?
+    we also need to think about not having some other item generate in the same location when we generate other things */
     for (int i = 0; i < 6; i ++){
-      row = Random.nextInt(5);
-      column = Random.nextInt(5);
+      Random r = new Random();
+      row = r.nextInt(5);
+      column = r.nextInt(5);
+      if (map[row][column].getName().equals("")) {
+                //need setters and getters for line below to work
+                //map[row][column].setName(plants[i]);
+              }
 
-      //need list of plant names (enum) and setters/getters to take this further
+
+
+
 
     }
   }
 
   /*SETTERS AND GETTERS FOR COUNTERS, DAY NUMBER, ETC */
+
 
   /*This is where the decisions/actions take place. The user will be presented with
   decisions he/she can make, and counters will be displayed (day, time, HP, hunger,
