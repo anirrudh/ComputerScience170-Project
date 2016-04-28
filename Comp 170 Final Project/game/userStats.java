@@ -1,4 +1,7 @@
-public class UserStats {
+
+
+public class userStats {
+
   String userName;
   String decision;
 
@@ -7,7 +10,7 @@ public class UserStats {
   private int day;
   private int hour;
 
-  public UserStats(){
+  public userStats(){
     userName = null;
     decision = null;
 
@@ -15,6 +18,16 @@ public class UserStats {
     defense = 0;
     day = 0;
     hour = 0;
+  }
+
+  public userStats(String userName){
+    this.userName = userName;
+    decision = null;
+
+    hp = 100;
+    defense = 100;
+    day = 1;
+    hour = 1;
   }
 
   public String getUserName(){

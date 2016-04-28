@@ -1,6 +1,8 @@
 /**
  * Created by Zack on 4/24/2016.
  */
+package game;
+
 public class NewEnemy {
     public static void main(String[] args){
 
@@ -60,6 +62,8 @@ public class NewEnemy {
         enemies[8].setEnemyHitPoints(30);
         enemies[8].setEnemyLocation("Snow Region");
         enemies[8].setEnemyImage("flyingSnowy.png");
+
+        System.out.println(enemies[8]);
 
 
 
