@@ -26,7 +26,9 @@ public class Enemies extends Sarz{
     }
 
     public void newEnemy(){
+      
     Enemies[] enemies = new Enemies[8];
+
 
     enemies[0].setEnemyName("Dragon");
     enemies[0].setEnemyHealth(100);

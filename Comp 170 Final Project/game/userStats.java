@@ -69,4 +69,23 @@ public class userStats {
   public void setHour(int hour){
     this.hour = hour;
   }
+  /*
+  public boolean isDay() {
+
+       while (playerInput == 1 || playerInput == 2 || playerInput == 3 || playerInput == 4) {
+           hour++;
+           At current moment, day is the first 6hrs of the game and every other 6hrs after that
+           if (hour < 162){
+             return true;
+           }
+         }
+         return false;
+       }
+       public int getDay(){
+     int day;
+     day = (int) Math.ceil((hour / 12)) + 1;
+     return day;
+ }
+*/
+
 }

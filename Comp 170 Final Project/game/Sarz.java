@@ -28,9 +28,8 @@ public class Sarz {
     }
     inputStream.close();
 
-    System.out.println("Enter your name.");
+
     userStats user = new userStats(keyboard.nextLine());
-    user.setDecision("PLAY");
 
   }
 
@@ -38,16 +37,21 @@ public class Sarz {
   public void mapGeneration(){
 
     Sarz[][] map = new Sarz[5][5];
+    int count = 0;
 
-    //map[0][0] = new Enemies();
-
-
-    for (int i = 0; i < 8; i++){
+    while (count < 8){
       int row;
       int column;
 
       row = r.nextInt(5);
       column = r.nextInt(5);
+
+      if(map[row][column] == null){
+
+        map[row][column] = new Enemies();
+
+        count++;
+      }
 
     }
 
