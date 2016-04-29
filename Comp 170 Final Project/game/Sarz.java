@@ -1,4 +1,4 @@
-
+import java.util.*;
 import java.io.FileNotFoundException;
 import java.io.File;
 import java.util.Scanner;
@@ -10,7 +10,7 @@ public class Sarz {
 
   Scanner keyboard = new Scanner(System.in);
   Random r = new Random();
-
+  /** Reads in introduction text and asks for username.**/
   public void premise(){
 
     Scanner inputStream = null;
@@ -35,32 +35,33 @@ public class Sarz {
 
   /* This is where the map is generated & items are hidden*/
   public void mapGeneration(){
+    int count = 0;
+    int row;
+    int column;
+    //make an enemies object so we can generate the enemy types (we will do similarly for plants and whatever else we need)
+    Enemies e = new Enemies();
+    e.generateEnemies();
 
     Sarz[][] map = new Sarz[5][5];
-    int count = 0;
-
-    while (count < 8){
-      int row;
-      int column;
-
+    //this while loop generates four enemies as it is. the commented out print line tests where they are, but I can't get it to print the enemy names as strings
+    while (count < 4){
       row = r.nextInt(5);
       column = r.nextInt(5);
-
-      if(map[row][column] == null){
-
-        map[row][column] = new Enemies();
-
+      if (map[row][column] == null){
+        map[row][column] = e.enemies[r.nextInt(8)];
+        //System.out.println(map[row][column] + " at " + row + "," + column);
         count++;
       }
-
     }
 
+  }
 
-    }
 
-    //generateItems();
-    //generateEnemies();
+
 }
+
+
+
 
 
 

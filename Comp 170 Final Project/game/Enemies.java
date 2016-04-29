@@ -1,6 +1,8 @@
 /**
  * Created by Zack on 4/24/2016.
  */
+ import java.util.*;
+ import java.lang.*;
 
 
 public class Enemies extends Sarz{
@@ -10,12 +12,15 @@ public class Enemies extends Sarz{
     private int enemyHitPoints;
     private String enemyLocation;
     public String enemyImage;
+    Enemies[] enemies;
 
     public Enemies(){
        this.enemyName=enemyName;
        this.enemyHealth=enemyHealth;
        this.enemyHitPoints=enemyHitPoints;
        this.enemyLocation=enemyLocation;
+       enemies = new Enemies[9];
+
    }
 
     public Enemies(String enemyName, int enemyHealth, int enemyHitPoints, String enemyLocation) {
@@ -23,67 +28,46 @@ public class Enemies extends Sarz{
         this.enemyHealth = enemyHealth;
         this.enemyHitPoints = enemyHitPoints;
         this.enemyLocation = enemyLocation;
+
+    }
+    /** Making enemy types here that can be picked from randomly in Sarz**/
+    public void generateEnemies(){
+
+    enemies[0] = new Enemies("Dragon", 100, 100, "Cave");
+    enemies[1] = new Enemies("Saturn Fly Trap", 10, 15, "Forest");
+    enemies[2] = new Enemies("Ice Ape", 50, 40, "Snow Region");
+    enemies[3] = new Enemies("Red Spotted Python", 25, 50, "Grassland");
+    enemies[4] = new Enemies("Swarm of Blue Hornets", 15, 15, "Forest");
+    enemies[5] = new Enemies("Needle Cat", 35, 30, "Grassland");
+    enemies[6] = new Enemies("Sakai", 20, 10, "Snow Region");
+    enemies[7] = new Enemies("Swinging Squirrel", 25, 30, "Forest");
+    enemies[8] = new Enemies("Flying Penguin", 40, 30, "Snow Region");
+
+
+
+    /*
+
+    enemies[0].setEnemyImage("dragonCave.gif");
+    enemies[1].setEnemyImage("trapForest.png");
+    enemies[2].setEnemyImage("apeSnowy.png");
+    enemies[3].setEnemyImage("snakePlains.png");
+    enemies[4].setEnemyImage("hornetsForest.png");
+    enemies[5].setEnemyImage("catPlains.png");
+    enemies[6].setEnemyImage("sakaiSnowy.png");
+    enemies[7].setEnemyImage("squirrelForest.png");
+    enemies[8].setEnemyImage("flyingSnowy.png");
+    */
+
     }
 
-    public void newEnemy(){
-      
-    Enemies[] enemies = new Enemies[8];
 
 
-    enemies[0].setEnemyName("Dragon");
-    enemies[0].setEnemyHealth(100);
-    enemies[0].setEnemyHitPoints(100);
-    enemies[0].setEnemyLocation("Cave");
-    enemies[0].setEnemyImage("dragonCave.gif");
+    public Enemies[] getEnemies(){
+      return enemies;
+    }
 
-    enemies[1].setEnemyName("Saturn Fly Trap");
-    enemies[1].setEnemyHealth(10);
-    enemies[1].setEnemyHitPoints(15);
-    enemies[1].setEnemyLocation("Forest");
-    enemies[1].setEnemyImage("trapForest.png");
-
-    enemies[2].setEnemyName("Ice Ape");
-    enemies[2].setEnemyHealth(50);
-    enemies[2].setEnemyHitPoints(40);
-    enemies[2].setEnemyLocation("Snow Region");
-    enemies[2].setEnemyImage("apeSnowy.png");
-
-    enemies[3].setEnemyName("Red Spotted Python");
-    enemies[3].setEnemyHealth(25);
-    enemies[3].setEnemyHitPoints(50);
-    enemies[3].setEnemyLocation("Grassland");
-    enemies[3].setEnemyImage("snakePlains.png");
-
-    enemies[4].setEnemyName("Swarm of Blue Hornets");
-    enemies[4].setEnemyHealth(15);
-    enemies[4].setEnemyHitPoints(15);
-    enemies[4].setEnemyLocation("Forest");
-    enemies[4].setEnemyImage("hornetsForest.png");
-
-    enemies[5].setEnemyName("Needle Cat");
-    enemies[5].setEnemyHealth(35);
-    enemies[5].setEnemyHitPoints(30);
-    enemies[5].setEnemyLocation("Grassland");
-    enemies[5].setEnemyImage("catPlains.png");
-
-    enemies[6].setEnemyName("Sakai");
-    enemies[6].setEnemyHealth(20);
-    enemies[6].setEnemyHitPoints(10);
-    enemies[6].setEnemyLocation("Snow Region");
-    enemies[6].setEnemyImage("sakaiSnowy.png");
-
-    enemies[7].setEnemyName("Swinging Squirrel");
-    enemies[7].setEnemyHealth(25);
-    enemies[7].setEnemyHitPoints(30);
-    enemies[7].setEnemyLocation("Forest");
-    enemies[7].setEnemyImage("squirrelForest.png");
-
-    enemies[8].setEnemyName("Flying Penguin");
-    enemies[8].setEnemyHealth(40);
-    enemies[8].setEnemyHitPoints(30);
-    enemies[8].setEnemyLocation("Snow Region");
-    enemies[8].setEnemyImage("flyingSnowy.png");
-
+    public void setEnemies(Enemies[] enemiesArray){
+      enemies = enemiesArray;
     }
 
     public String getEnemyImage() {
