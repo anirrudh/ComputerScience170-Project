@@ -1,6 +1,6 @@
 
 
-public class userStats {
+public class UserStats {
 
   String userName;
   String decision;
@@ -10,7 +10,7 @@ public class userStats {
   private int day;
   private int hour;
 
-  public userStats(){
+  public UserStats(){
     userName = null;
     decision = null;
 
@@ -20,7 +20,7 @@ public class userStats {
     hour = 0;
   }
 
-  public userStats(String userName){
+  public UserStats(String userName){
     this.userName = userName;
     decision = null;
 
@@ -69,23 +69,5 @@ public class userStats {
   public void setHour(int hour){
     this.hour = hour;
   }
-  /*
-  public boolean isDay() {
-
-       while (playerInput == 1 || playerInput == 2 || playerInput == 3 || playerInput == 4) {
-           hour++;
-           At current moment, day is the first 6hrs of the game and every other 6hrs after that
-           if (hour < 162){
-             return true;
-           }
-         }
-         return false;
-       }
-       public int getDay(){
-     int day;
-     day = (int) Math.ceil((hour / 12)) + 1;
-     return day;
- }
-*/
 
 }

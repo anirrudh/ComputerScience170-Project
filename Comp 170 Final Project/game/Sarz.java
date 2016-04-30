@@ -38,22 +38,61 @@ public class Sarz {
     int count = 0;
     int row;
     int column;
-    //make an enemies object so we can generate the enemy types (we will do similarly for plants and whatever else we need)
+
+    Sarz[][] map = new Sarz[5][5];
+
     Enemies e = new Enemies();
     e.generateEnemies();
 
-    Sarz[][] map = new Sarz[5][5];
-    //this while loop generates four enemies as it is. the commented out print line tests where they are, but I can't get it to print the enemy names as strings
-    while (count < 4){
+    //This generates enemies
+    while (count < 5){
       row = r.nextInt(5);
       column = r.nextInt(5);
       if (map[row][column] == null){
         map[row][column] = e.enemies[r.nextInt(8)];
-        //System.out.println(map[row][column] + " at " + row + "," + column);
+        System.out.println(((Enemies)map[row][column]).getEnemyName() + " at " + row + "," + column);
         count++;
       }
     }
 
+    Item itemGenerator = new Item();
+    itemGenerator.generateItems();
+
+    //This generates plants
+    count = 0;
+    while (count < 6){
+      row = r.nextInt(5);
+      column = r.nextInt(5);
+      if (map[row][column] == null){
+        map[row][column] = itemGenerator.plants[r.nextInt(5)];
+        System.out.println(((Item)map[row][column]).getItemName() + " at " + row + "," + column);
+        count++;
+      }
+    }
+
+    //This generates water
+    count = 0;
+    while(count < 4){
+      row = r.nextInt(5);
+      column = r.nextInt(5);
+      if (map[row][column] == null){
+        map[row][column] = itemGenerator.water[0];
+        System.out.println(((Item)map[row][column]).getItemName() + " at " + row + "," + column);
+        count ++;
+      }
+    }
+
+    //This generates useless items
+    count = 0;
+    while(count < 10){
+      row = r.nextInt(5);
+      column = r.nextInt(5);
+      if (map[row][column] == null){
+        map[row][column] = itemGenerator.uselessItems[r.nextInt(10)];
+        System.out.println(((Item)map[row][column]).getItemName() + " at " + row + "," + column);
+        count ++;
+      }
+    }
   }
 
 
