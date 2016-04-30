@@ -6,17 +6,17 @@ public class UserStats {
   String decision;
 
   private int hp;
-  private int defense;
   private int day;
   private int hour;
   private int hours;
+  private boolean weaponChoice;
 
   public UserStats(){
     userName = null;
     decision = null;
+    weaponChoice = false;
 
     hp = 0;
-    defense = 0;
     day = 0;
     hour = 0;
   }
@@ -26,7 +26,6 @@ public class UserStats {
     decision = null;
 
     hp = 100;
-    defense = 100;
     day = 1;
     hour = 1;
   }
@@ -40,9 +39,6 @@ public class UserStats {
 
   public int getHP(){
     return hp;
-  }
-  public int getDefense(){
-    return defense;
   }
   public int getDay(){
     return day;
@@ -61,21 +57,25 @@ public class UserStats {
   public void setHP(int hp){
     this.hp = hp;
   }
-  public void setDefense(int defense){
-    this.defense = defense;
-  }
   public void setDay(int day){
     this.day = day;
   }
   public void setHour(int hour){
     this.hour = hour;
   }
-  public int MedicineChosen()
-
-  {
-    hp = hp + 300;
+  public int setMedicine() {
+    setHP(getHP() + 300);
     //System.out.println(hp);
-    return hp;}
+    return hp;
+  }
+
+  public void setMachete(boolean weaponChoice){
+    this.weaponChoice = weaponChoice;
+  }
+  public boolean getMachete(){
+    return weaponChoice;
+  }
+
   public int Time()
   {
 
