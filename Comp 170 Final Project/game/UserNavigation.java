@@ -1,4 +1,3 @@
-/*
 import java.util.*;
 import java.io.FileNotFoundException;
 import java.io.File;
@@ -11,7 +10,7 @@ import java.lang.Math;
 * Last Edit:
 *
 *
-*
+*/
 public class UserNavigation {
   String KM = null;
   int userRow;
@@ -28,8 +27,18 @@ public class UserNavigation {
     switch(KM)
     {
       case "W":
+      System.out.println("You're moving forward now. Into the dark.");
+      userRow + 1 = userRow;
+      s.encounter(s.map[userRow][userColumn]);
+      case "A":
+      System.out.println("You're moving to the left now. It's cold.")
+      userColumn + 1 = userColumn;
       s.encounter(s.map[userRow][userColumn]);
       break;
+      case "D":
+      System.out.println("You're moving to the right now. It's cold.")
+      userColumn + 1 = userColumn;
+      s.encounter(s.map[userRow][userColumn]);
       default:
       System.out.println("This doesn't work, try again.");
     }
@@ -56,4 +65,3 @@ public class UserNavigation {
 
   }
 }
-**/
