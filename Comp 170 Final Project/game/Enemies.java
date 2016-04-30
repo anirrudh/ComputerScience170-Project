@@ -1,37 +1,37 @@
 /**
- * Created by Zack on 4/24/2016.
- */
- import java.util.*;
- import java.lang.*;
+* Created by Zack on 4/24/2016.
+*/
+import java.util.*;
+import java.lang.*;
 
 
 public class Enemies extends Sarz{
 
-    private String enemyName;
-    private int enemyHealth;
-    private int enemyHitPoints;
-    private String enemyLocation;
-    public String enemyImage;
-    Enemies[] enemies;
+  private String enemyName;
+  private int enemyHealth;
+  private int enemyHitPoints;
+  private String enemyLocation;
+  public String enemyImage;
+  Enemies[] enemies;
 
-    public Enemies(){
-       enemyName = null;
-       enemyHealth = 0;
-       enemyHitPoints = 0;
-       enemyLocation = null;
-       enemies = new Enemies[9];
+  public Enemies(){
+    enemyName = null;
+    enemyHealth = 0;
+    enemyHitPoints = 0;
+    enemyLocation = null;
+    enemies = new Enemies[9];
 
-   }
+  }
 
-    public Enemies(String enemyName, int enemyHealth, int enemyHitPoints, String enemyLocation) {
-        this.enemyName = enemyName;
-        this.enemyHealth = enemyHealth;
-        this.enemyHitPoints = enemyHitPoints;
-        this.enemyLocation = enemyLocation;
+  public Enemies(String enemyName, int enemyHealth, int enemyHitPoints, String enemyLocation) {
+    this.enemyName = enemyName;
+    this.enemyHealth = enemyHealth;
+    this.enemyHitPoints = enemyHitPoints;
+    this.enemyLocation = enemyLocation;
 
-    }
-    /** Making enemy types here that can be picked from randomly in Sarz**/
-    public void generateEnemies(){
+  }
+  /** Making enemy types here that can be picked from randomly in Sarz**/
+  public void generateEnemies(){
 
     enemies[0] = new Enemies("DRAGON", 100, 100, "Cave");
     enemies[1] = new Enemies("SATURN FLY TRAP", 10, 15, "Forest");
@@ -58,58 +58,58 @@ public class Enemies extends Sarz{
     enemies[8].setEnemyImage("flyingSnowy.png");
     */
 
-    }
+  }
 
 
 
-    public Enemies[] getEnemies(){
-      return enemies;
-    }
+  public Enemies[] getEnemies(){
+    return enemies;
+  }
 
-    public void setEnemies(Enemies[] enemiesArray){
-      enemies = enemiesArray;
-    }
-    /*
-    public String getEnemyImage() {
-        return enemyImage;
-    }
+  public void setEnemies(Enemies[] enemiesArray){
+    enemies = enemiesArray;
+  }
+  /*
+  public String getEnemyImage() {
+  return enemyImage;
+}
 
-    public void setEnemyImage(String enemyImage) {
-        this.enemyImage = enemyImage;
-    }
-    */
+public void setEnemyImage(String enemyImage) {
+this.enemyImage = enemyImage;
+}
+*/
 
-    public String getEnemyName() {
-        return enemyName;
-    }
+public String getEnemyName() {
+  return enemyName;
+}
 
-    public void setEnemyName(String enemyName) {
-        this.enemyName = enemyName;
-    }
+public void setEnemyName(String enemyName) {
+  this.enemyName = enemyName;
+}
 
 
-    public int getEnemyHealth() {
+public int getEnemyHealth() {
 
-        return enemyHealth;
-    }
+  return enemyHealth;
+}
 
-    public void setEnemyHealth(int enemyHealth) {
-        this.enemyHealth = enemyHealth;
-    }
+public void setEnemyHealth(int enemyHealth) {
+  this.enemyHealth = enemyHealth;
+}
 
-    public int getEnemyHitPoints() {
-        return enemyHitPoints;
-    }
+public int getEnemyHitPoints() {
+  return enemyHitPoints;
+}
 
-    public void setEnemyHitPoints(int enemyHitPoints) {
-        this.enemyHitPoints = enemyHitPoints;
-    }
+public void setEnemyHitPoints(int enemyHitPoints) {
+  this.enemyHitPoints = enemyHitPoints;
+}
 
-    public String getEnemyLocation() {
-        return enemyLocation;
-    }
+public String getEnemyLocation() {
+  return enemyLocation;
+}
 
-    public void setEnemyLocation(String enemyLocation) {
-        this.enemyLocation = enemyLocation;
-    }
+public void setEnemyLocation(String enemyLocation) {
+  this.enemyLocation = enemyLocation;
+}
 }
