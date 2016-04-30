@@ -8,7 +8,7 @@ import java.lang.Math;
 public class Sarz {
 
   GameGeneration g = new GameGeneration();
-
+  
   /** Reads in introduction text and asks for username.**/
   public void premise(){
 
