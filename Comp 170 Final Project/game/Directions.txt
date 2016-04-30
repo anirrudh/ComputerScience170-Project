@@ -1,0 +1,4 @@
+Which direction do you wish to go in?
+Press ‘W’ for forward. 
+Press ‘A’  to move left. 
+Press ‘D’ to move right.

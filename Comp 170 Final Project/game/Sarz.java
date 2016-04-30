@@ -10,8 +10,10 @@ public class Sarz {
 
   Scanner keyboard = new Scanner(System.in);
   Random r = new Random();
+  String playerName;
+
   /** Reads in introduction text and asks for username.**/
-  public void premise(){
+public void premise(){
 
     Scanner inputStream = null;
 
@@ -27,14 +29,22 @@ public class Sarz {
       System.out.println(line);
     }
     inputStream.close();
-
-
-    userStats user = new userStats(keyboard.nextLine());
-
+    Sarz start = new Sarz();
+    start.writeOutput();
   }
+  /*This is where we will set the playerName*/
+public String setPlayerName()
+  {
 
+    Scanner playerNameKeyboard = new Scanner(System.in);
+    playerName = playerNameKeyboard.next();
+    System.out.println("You are a brave one, " + playerName + ", welcome to the Sarz mission.");
+    return playerName; }
   /* This is where the map is generated & items are hidden*/
-  public void mapGeneration(){
+
+public void mapGeneration()
+
+{
     int count = 0;
     int row;
     int column;
@@ -94,6 +104,61 @@ public class Sarz {
       }
     }
   }
+
+
+  /*This is simply the write output function so the code is streamlined*/
+  /*This is where we ask the user about what their "ability" will be*/
+  public int getWeapon()
+  {
+    int userChoice = 0;
+
+    Scanner userInput = new Scanner(System.in);
+    Scanner inputWeaponFile = null;
+    try{
+      inputWeaponFile = new Scanner(new File("WeaponsChoice.txt"));
+    }
+    catch(FileNotFoundException e){
+      System.out.println("Bye, you fuckhead.");
+      System.exit(0);
+    }
+    while(inputWeaponFile.hasNextLine()){
+      String line = inputWeaponFile.nextLine();
+      System.out.println(line);
+
+    }
+    userChoice = userInput.nextInt();
+    switch (userChoice) {
+    case 1: System.out.println("Medicine will help you increase your Health Points by 300.");
+            System.out.println("");
+            getWeapon();
+            break;
+    case 2: System.out.println("You chose the Medicine!");
+            UserStats medInc = new UserStats();
+            medInc.MedicineChosen();
+
+            break;
+    case 3: System.out.println("The Machete will cut all damage you take from enemies in half.");
+            getWeapon();
+            break;
+    case 4: System.out.println("You chose the Machete!");
+            break;
+    default: System.out.println("Invalid input. Try again.");
+             getWeapon();
+             break;
+  }
+  return userChoice;
+  }
+  /* This is simply to write the Output here*/
+public void writeOutput()
+{
+  setPlayerName();
+  System.out.println("You have the choice between taking two items to help you on your journey: ");
+  System.out.print("Either some Medicine or A Machete.");
+  System.out.println("");
+  getWeapon();
+  System.out.println("Let's begin this adventure!");
+
+}
 
 
 

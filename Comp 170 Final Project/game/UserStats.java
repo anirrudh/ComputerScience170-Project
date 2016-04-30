@@ -9,6 +9,7 @@ public class UserStats {
   private int defense;
   private int day;
   private int hour;
+  private int hours;
 
   public UserStats(){
     userName = null;
@@ -68,6 +69,23 @@ public class UserStats {
   }
   public void setHour(int hour){
     this.hour = hour;
+  }
+  public int MedicineChosen()
+
+  {
+    hp = hp + 300;
+    //System.out.println(hp);
+    return hp;}
+  public int Time()
+  {
+
+    boolean playerMoveTime;
+    playerMoveTime = false;
+    if (playerMoveTime = true)
+    {
+      hours = hours + 1;
+    }
+    return hours;
   }
 
 }
