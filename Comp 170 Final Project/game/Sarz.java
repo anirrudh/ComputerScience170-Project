@@ -10,7 +10,7 @@ public class Sarz {
   Scanner keyboard = new Scanner(System.in);
   Random r = new Random();
   UserStats user = new UserStats();
-  UserNavigation n = new UserNavigation();
+  //UserNavigation n = new UserNavigation();
   Sarz[][] map = new Sarz[5][5];
 
   /** Reads in introduction text and asks for username.**/
@@ -35,8 +35,9 @@ public class Sarz {
 
   public void play(){
     mapGeneration();
-    n.userMoveIntro();
-    n.moveForward();
+    encounter(map[4][4]);
+    //n.userMoveIntro();
+    //n.moveForward();
   }
     //enemyEncounter(map[0][0]);
 
@@ -163,7 +164,26 @@ public class Sarz {
     System.out.println("You have encountered a " + ((Item)array).getItemName());
     }
     else if (array instanceof Enemies){
-    System.out.println("You have encountered a " + ((Enemies)array).getEnemyName());
+    System.out.println("You have encountered a " + ((Enemies)array).getEnemyName() + "\n\nTime to battle!" );
+    battle(array);
     }
+  }
+
+
+
+  public void battle(Sarz array) {
+    if (user.getMachete() == true){
+      user.setHP((user.getHP())-(((Enemies)array).getEnemyHitPoints() * .5));
+      System.out.println("The " + ((Enemies)array).getEnemyName() + " has inflicted " + (((Enemies)array).getEnemyHitPoints()*.5) + " damage!");
+
+    }
+    else {
+    user.setHP((user.getHP())-((Enemies)array).getEnemyHitPoints());
+    System.out.println("The " + ((Enemies)array).getEnemyName() + " has inflicted " + ((Enemies)array).getEnemyHitPoints() + " damage!");
+    }
+    System.out.println("\nYour health is: " + user.getHP());
+
+
+
   }
 }

@@ -1,3 +1,4 @@
+/*
 import java.util.*;
 import java.io.FileNotFoundException;
 import java.io.File;
@@ -9,11 +10,9 @@ import java.lang.Math;
 * Given birth to by @AnirrudhKrishnan
 * Last Edit:
 *
-**/
-
-
-public class UserNavigation
-{
+*
+*
+public class UserNavigation {
   String KM = null;
   int userRow;
   int userColumn;
@@ -21,7 +20,7 @@ public class UserNavigation
 
   //This will make the user move forward in the array.
   public void moveForward() {
-    //GameGeneration.mapGeneration();
+
     userRow = 0;
     userColumn = 0;
     Scanner keyMove = new Scanner(System.in);
@@ -57,3 +56,4 @@ public class UserNavigation
 
   }
 }
+**/

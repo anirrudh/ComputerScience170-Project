@@ -8,22 +8,22 @@ import java.lang.*;
 public class Enemies extends Sarz{
 
   private String enemyName;
-  private int enemyHealth;
-  private int enemyHitPoints;
+  private double enemyHealth;
+  private double enemyHitPoints;
   private String enemyLocation;
   public String enemyImage;
   Enemies[] enemies;
 
   public Enemies(){
     enemyName = null;
-    enemyHealth = 0;
-    enemyHitPoints = 0;
+    enemyHealth = 0.0;
+    enemyHitPoints = 0.0;
     enemyLocation = null;
     enemies = new Enemies[9];
 
   }
 
-  public Enemies(String enemyName, int enemyHealth, int enemyHitPoints, String enemyLocation) {
+  public Enemies(String enemyName, double enemyHealth, double enemyHitPoints, String enemyLocation) {
     this.enemyName = enemyName;
     this.enemyHealth = enemyHealth;
     this.enemyHitPoints = enemyHitPoints;
@@ -33,15 +33,15 @@ public class Enemies extends Sarz{
   /** Making enemy types here that can be picked from randomly in Sarz**/
   public void generateEnemies(){
 
-    enemies[0] = new Enemies("DRAGON", 100, 100, "Cave");
-    enemies[1] = new Enemies("SATURN FLY TRAP", 10, 15, "Forest");
-    enemies[2] = new Enemies("ICE APE", 50, 40, "Snow Region");
-    enemies[3] = new Enemies("RED SPOTTED PYTHON", 25, 50, "Grassland");
-    enemies[4] = new Enemies("SWARM OF BLUE HORNETS", 15, 15, "Forest");
-    enemies[5] = new Enemies("NEEDLE CAT", 35, 30, "Grassland");
-    enemies[6] = new Enemies("SAKAI", 20, 10, "Snow Region");
-    enemies[7] = new Enemies("SWINGING SQUIRREL", 25, 30, "Forest");
-    enemies[8] = new Enemies("FLYING PENGUIN", 40, 30, "Snow Region");
+    enemies[0] = new Enemies("DRAGON", 100.00, 100.00, "Cave");
+    enemies[1] = new Enemies("SATURN FLY TRAP", 10.00, 15.00, "Forest");
+    enemies[2] = new Enemies("ICE APE", 50.00, 40.00, "Snow Region");
+    enemies[3] = new Enemies("RED SPOTTED PYTHON", 25.00, 50.00, "Grassland");
+    enemies[4] = new Enemies("SWARM OF BLUE HORNETS", 15.00, 15.00, "Forest");
+    enemies[5] = new Enemies("NEEDLE CAT", 35.00, 30.00, "Grassland");
+    enemies[6] = new Enemies("SAKAI", 20.00, 10.00, "Snow Region");
+    enemies[7] = new Enemies("SWINGING SQUIRREL", 25.00, 30.00, "Forest");
+    enemies[8] = new Enemies("FLYING PENGUIN", 40.00, 30.00, "Snow Region");
 
 
 
@@ -88,20 +88,20 @@ public void setEnemyName(String enemyName) {
 }
 
 
-public int getEnemyHealth() {
+public double getEnemyHealth() {
 
   return enemyHealth;
 }
 
-public void setEnemyHealth(int enemyHealth) {
+public void setEnemyHealth(double enemyHealth) {
   this.enemyHealth = enemyHealth;
 }
 
-public int getEnemyHitPoints() {
+public double getEnemyHitPoints() {
   return enemyHitPoints;
 }
 
-public void setEnemyHitPoints(int enemyHitPoints) {
+public void setEnemyHitPoints(double enemyHitPoints) {
   this.enemyHitPoints = enemyHitPoints;
 }
 

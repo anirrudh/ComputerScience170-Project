@@ -5,7 +5,7 @@ public class UserStats {
   String userName;
   String decision;
 
-  private int hp;
+  private double hp;
   private int day;
   private int hour;
   private int hours;
@@ -16,7 +16,7 @@ public class UserStats {
     decision = null;
     weaponChoice = false;
 
-    hp = 0;
+    hp = 0.0;
     day = 0;
     hour = 0;
   }
@@ -25,7 +25,7 @@ public class UserStats {
     this.userName = userName;
     decision = null;
 
-    hp = 100;
+    hp = 100.00;
     day = 1;
     hour = 1;
   }
@@ -37,7 +37,7 @@ public class UserStats {
     return decision;
   }
 
-  public int getHP(){
+  public double getHP(){
     return hp;
   }
   public int getDay(){
@@ -54,7 +54,7 @@ public class UserStats {
     this.decision = decision;
   }
 
-  public void setHP(int hp){
+  public void setHP(double hp){
     this.hp = hp;
   }
   public void setDay(int day){
@@ -63,8 +63,8 @@ public class UserStats {
   public void setHour(int hour){
     this.hour = hour;
   }
-  public int setMedicine() {
-    setHP(getHP() + 300);
+  public double setMedicine() {
+    setHP(getHP() + 30.00);
     //System.out.println(hp);
     return hp;
   }
