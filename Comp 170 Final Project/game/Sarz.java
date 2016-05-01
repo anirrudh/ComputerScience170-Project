@@ -50,6 +50,64 @@ public class Sarz {
     System.out.println("\nLet's begin this adventure!");
 
   }
+    public int checkRowBounds()
+    {
+        try {
+            //System.out.println("Checking here" + userRow);
+            if(userRow == 5)
+            {
+                //System.out.println(userRow);
+                System.out.println("Uh-oh, this looks like the end of the road. Try a differnt direction.");
+                userMoveIntro();
+                moveForward();
+                userRow = 4;
+                System.out.println(userRow);
+                return userRow;
+            }
+            return userRow;
+        }
+        catch(ArrayIndexOutOfBoundsException err)
+        {
+            System.out.println("You can't keep going forward, it's the end of the road. Please choose a different direction.");
+            userRow = 4;
+            userMoveIntro();
+            moveForward();
+            return userRow;
+        }
+    }
+    public int checkColumnBounds()
+
+    {
+        try
+        {
+            if(userColumn == 5)
+            {
+                System.out.println("Hey! You've reached the end of the road here. \n Looks like you'll have to find another way around.");
+                userMoveIntro();
+                moveForward();
+                userColumn = 4;
+                System.out.println(userColumn);
+            }
+            else if(userColumn == 0)
+            {
+                System.out.println("Hey! You've reached the end of the road here. \n Looks like you'll have to find another way around.");
+                userMoveIntro();
+                moveForward();
+                userColumn = 0;
+                System.out.println(userColumn);
+            }
+        }
+        catch(ArrayIndexOutOfBoundsException err)
+        {
+            System.out.println("You can't keep going. It's the end of the road. Please choose a different direction.");
+            userColumn = userColumn - 1;
+            userMoveIntro();
+            moveForward();
+            return userColumn;
+        }
+        return userColumn;
+    }
+
 
   public String setPlayerName() {
     Scanner playerNameKeyboard = new Scanner(System.in);
@@ -132,8 +190,10 @@ public class Sarz {
 
     }
 
-    userChoice = userInput.nextInt();
 
+    try
+    {
+      userChoice = userInput.nextInt();
     switch (userChoice) {
       case 1: System.out.println("\nMEDICINE will help you increase your Health Points by 300.");
       System.out.println("");
@@ -154,6 +214,13 @@ public class Sarz {
       break;
     }
     return userChoice;
+  }
+  catch (InputMismatchException e)
+  {
+    System.out.println("You didn't enter a vaild number. Please enter a vaild number.");
+    getWeapon();
+  }
+  return userChoice;
   }
 
   public void encounter(Sarz array){
@@ -275,25 +342,35 @@ public class Sarz {
 
     Scanner keyMove = new Scanner(System.in);
     KM = keyMove.nextLine().toUpperCase();
+
     switch(KM)
     {
       case "W":
         System.out.println("You're moving forward now. Into the dark.");
         userRow = 1 + userRow;
+        checkRowBounds();
+        checkColumnBounds();
         encounter(map[userRow][userColumn]);
         break;
       case "A":
         System.out.println("You're moving to the left now. It's cold.");
         userColumn = userColumn + 1;
+        checkRowBounds();
+        checkColumnBounds();
         encounter(map[userRow][userColumn]);
         break;
       case "D":
         System.out.println("You're moving to the right now. It's cold.");
         userColumn= 1 + userColumn;
+        checkRowBounds();
+        checkColumnBounds();
         encounter(map[userRow][userColumn]);
         break;
       default:
-        System.out.println("This doesn't work, try again.");
+      System.out.println("This doesn't work, try again.");
+      userMoveIntro();
+      moveForward();
+      break;
     }
   }
 
