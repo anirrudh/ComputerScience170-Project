@@ -11,45 +11,20 @@ public class Sarz {
   Random r = new Random();
   UserStats user = new UserStats();
   Sarz[][] map = new Sarz[5][5];
-  private int plantCount = 0;
-  private int waterCount = 0;
-  int userRow = 0;
-  int userColumn  = 0;
 
-  /** Reads in introduction text and asks for username.**/
-  public void premise(){
 
-    Scanner inputStream = null;
+  int plantCount = 0;
+  int waterCount = 0;
+  private int userRow = 0;
+  private int userColumn  = 0;
 
-    try{
-      inputStream = new Scanner(new File("SarzIntro.txt"));
-    }
-    catch(FileNotFoundException e){
-      System.out.println("Error in introduction.");
-      System.exit(0);
-    }
-    while(inputStream.hasNextLine()){
-      String line = inputStream.nextLine();
-      System.out.println(line);
-    }
-    inputStream.close();
-    writeOutput();
+  public void clearScreen(){
+    final String ANSI_CLS = "\u001b[2J";
+    final String ANSI_HOME = "\u001b[H";
+    System.out.print(ANSI_CLS + ANSI_HOME);
+    System.out.flush();
   }
-
-  public void play(){
-    mapGeneration();
-    userMoveIntro();
-    moveForward();
-  }
-  public void writeOutput() {
-    setPlayerName();
-    System.out.println("You have the choice between taking two items to help you on your journey: \n");
-    System.out.print("Either some MEDICINE or a MACHETE. \n");
-    System.out.println("");
-    getWeapon();
-    System.out.println("\nLet's begin this adventure!");
-
-  }
+  
   public int checkRowBounds() {
         try {
             //System.out.println("Checking here" + userRow);
@@ -85,7 +60,6 @@ public class Sarz {
                 userColumn = 4;
                 System.out.println(userColumn);
             }
-
         }
         catch(ArrayIndexOutOfBoundsException err)
         {
@@ -98,11 +72,11 @@ public class Sarz {
         return userColumn;
     }
 
-
   public String setPlayerName() {
     Scanner playerNameKeyboard = new Scanner(System.in);
     user = new UserStats(playerNameKeyboard.next());
-    System.out.println("\nYou're a brave one, " + user.getUserName() + ", welcome to the Sarz mission.");
+    clearScreen();
+    System.out.println("\nYou're a brave one, " + user.getUserName() + "!");
     return user.getUserName();
   }
   public void reset(){
@@ -113,35 +87,7 @@ public class Sarz {
     userRow = 0;
     userColumn  = 0;
   }
-  public void playAgain(){
-    System.out.println("Would you like to play again?");
-    System.out.println("Enter 1 for YES or 2 for NO.");
-    int playChoice = 0;
-    playChoice = keyboard.nextInt();
-    switch (playChoice) {
-      case 1:
-        reset();
-        Main.main(new String[0]);
-        break;
-      case 2:
-        System.out.println("Thanks for visiting Sarz++.");
-        System.exit(0);
-        break;
-      default:
-        System.out.println("Invalid input. Please enter a valid choice.");
-        playAgain();
-        break;
-    }
-  }
-  public void checkForWin(){
-    if ((plantCount == 2) && (waterCount ==1)) {
-      System.out.println("The water and plants you found are the signs needed that Sarz is inhabitable.");
-      System.out.println("You have to head back to Earth now and let your planet know there's more out there.");
-      System.out.println("\nThanks for playing Sarz++.");
-      playAgain();
-    }
 
-   }
   public void mapGeneration() {
     int count = 0;
     int row;
@@ -196,8 +142,6 @@ public class Sarz {
       }
     }
   }
-  /*This is simply the write output function so the code is streamlined*/
-  /*This is where we ask the user about what their "ability" will be*/
   public int getWeapon(){
     int userChoice = 0;
 
@@ -213,33 +157,36 @@ public class Sarz {
     while(inputWeaponFile.hasNextLine()){
       String line = inputWeaponFile.nextLine();
       System.out.println(line);
-
     }
-
 
     try {
       userChoice = userInput.nextInt();
       switch (userChoice) {
         case 1:
+          clearScreen();
           System.out.println("\nMEDICINE will help you increase your Health Points by 300.");
           System.out.println("");
           getWeapon();
           break;
         case 2:
-          System.out.println("\nYou chose the MEDICINE!");
+          clearScreen();
+          System.out.println("\nYou chose the MEDICINE!\n");
           user.setMachete(false);
           user.setMedicine();
           break;
         case 3:
+          clearScreen();
           System.out.println("\nThe MACHETE will cut all damage you take from enemies in half.");
           getWeapon();
           break;
         case 4:
-          System.out.println("\nYou chose the MACHETE!");
+          clearScreen();
+          System.out.println("\nYou chose the MACHETE!\n");
           user.setMachete(true);
           break;
         default:
           System.out.println("\nInvalid input. Try again.");
+          clearScreen();
           getWeapon();
           break;
         }
@@ -250,7 +197,7 @@ public class Sarz {
     getWeapon();
   }
   return userChoice;
-}
+  }
 
   public void encounter(Sarz array){
     if (array instanceof Item){
@@ -260,31 +207,31 @@ public class Sarz {
     }
     else if (array instanceof Enemies){
       System.out.println("\nYou are in a " + ((Enemies)array).getEnemyLocation() + ".");
-      System.out.println("\nYou have encountered a " + ((Enemies)array).getEnemyName() + "\n\nTime to battle!" );
+      System.out.println("\nYou have encountered a " + ((Enemies)array).getEnemyName() + "; time to battle!" );
       enemyAttack(array);
     }
   }
 
   public void itemEncounter(Sarz array){
+    Game g = new Game();
     Item i = new Item();
     //System.out.println(((Item)array).getUseful());
     if (((Item)array).getUseful() == 2){
-      System.out.println("Congratulations! This " + ((Item)array).getItemName() + " is a sign that Sarz++ may be inhabitable.");
+      System.out.println("Congratulations! This " + ((Item)array).getItemName() + " is a sign that Sarz++ may be inhabitable.\n");
       plantCount ++;
-      checkForWin();
+      g.checkForWin();
       userMoveIntro();
       moveForward();
-
     }
     if (((Item)array).getUseful() == 1){
-      System.out.println("Congratulations! This " + ((Item)array).getItemName() + " is a sign that Sarz++ may be inhabitable.");
+      System.out.println("Congratulations! This " + ((Item)array).getItemName() + " is a sign that Sarz++ may be inhabitable.\n");
       waterCount ++;
-      checkForWin();
+      g.checkForWin();
       userMoveIntro();
       moveForward();
     }
     else {
-      System.out.println("This won't help you on your mission.");
+      System.out.println("This won't help you on your mission.\n");
       userMoveIntro();
       moveForward();
     }
@@ -305,21 +252,24 @@ public class Sarz {
       System.out.println("\nThe enemy's health is: " + ((Enemies)array).getEnemyHealth());
       battleDialogue(array);
   }
+
   public void battleWin(Sarz array){
+    Game g = new Game();
     if (((Enemies)array).getEnemyHealth() <= 0){
-      System.out.println("You killed the " + ((Enemies)array).getEnemyName() + "!");
+      System.out.println("\nYou killed the " + ((Enemies)array).getEnemyName() + "!\n");
       userMoveIntro();
       moveForward();
     }
     else if ((user.getHP()) <= 0){
-      System.out.println("The " + ((Enemies)array).getEnemyName() + " has killed you!\n");
-      playAgain();
+      System.out.println("\nThe " + ((Enemies)array).getEnemyName() + " has killed you!\n");
+      g.playAgain();
     }
   }
 
   public void userAttack(Sarz array) {
     ((Enemies)array).setEnemyHealth((((Enemies)array).getEnemyHealth()-user.getHitPoints()));
-    System.out.println("You inflicted " + user.getHitPoints() + " damage!");
+    clearScreen();
+    System.out.println("\nYou inflicted " + user.getHitPoints() + " damage!");
     battleWin(array);
     System.out.println("\nYour health is: " + user.getHP());
     System.out.println("\nThe enemy's health is: " + ((Enemies)array).getEnemyHealth());
@@ -332,49 +282,50 @@ public class Sarz {
     int count = 0;
     int MAX_TRIES = 2;
     while(!success && count++ < MAX_TRIES)
-    {
-    int decision = 0;
-    //Sarz redoBattle = new Sarz();
-    System.out.println("\nPlease enter:");
-    System.out.println("\n1 to attack");
-    System.out.println("2 to run away\n");
+      {
+        int decision = 0;
+        //Sarz redoBattle = new Sarz();
+        System.out.println("\nPlease enter:");
+        System.out.println("\n1 to attack");
+        System.out.println("2 to run away\n");
 
-    try {
-      decision = keyboard.nextInt();
-    switch (decision) {
+        try {
+          decision = keyboard.nextInt();
 
-      case 1:
-            userAttack(array);
-            enemyAttack(array);
-            break;
-      case 2:
-            if (r.nextInt(10) > 5){
-              System.out.println("You managed to escape!\n");
-              userMoveIntro();
-              moveForward();
-            }
-            else {
-              System.out.println("You couldn't escape!");
+          switch (decision) {
+
+            case 1:
+              userAttack(array);
               enemyAttack(array);
-
+              break;
+            case 2:
+              if (r.nextInt(10) > 5){
+                clearScreen();
+                System.out.println("\nYou managed to escape!\n");
+                userMoveIntro();
+                moveForward();
+              }
+              else {
+                clearScreen();
+                System.out.println("\nYou couldn't escape!\n");
+                enemyAttack(array);
             }
             break;
+          }
+        success = true;
+      }
+
+      catch (InputMismatchException e) {
+        System.out.println("You didn't enter a vaild number...try again.");
+        //success = true;
+        //Sarz.battleDialogue(Sarz array);
+        //reloop++;
+      }
     }
-    success = true;
   }
 
-  catch (InputMismatchException e)
-  {
-    System.out.println("You didn't enter a vaild number...try again.");
-    //success = true;
-    //Sarz.battleDialogue(Sarz array);
-    //reloop++;
-  }
-}
-}
   public void userMoveIntro() {
-    Scanner inputStreamPrompt = null; //Use the scanner to read the files in.
-    //This is where we will ask the user which directinon they would like to move in.
+    Scanner inputStreamPrompt = null;
     try
     {
       inputStreamPrompt = new Scanner(new File("Directions.txt"));
@@ -388,7 +339,6 @@ public class Sarz {
       System.out.println(prompt);
     }
     inputStreamPrompt.close();
-
   }
 
   public void moveForward() {
@@ -400,24 +350,24 @@ public class Sarz {
     switch(KM)
     {
       case "W":
-        System.out.println("You're moving forward now. Into the dark.");
         userRow = 1 + userRow;
         checkRowBounds();
         checkColumnBounds();
+        clearScreen();
         encounter(map[userRow][userColumn]);
         break;
       case "A":
-        System.out.println("You're moving to the left now. It's cold.");
         userColumn = userColumn + 1;
         checkRowBounds();
         checkColumnBounds();
+        clearScreen();
         encounter(map[userRow][userColumn]);
         break;
       case "D":
-        System.out.println("You're moving to the right now. It's cold.");
         userColumn= 1 + userColumn;
         checkRowBounds();
         checkColumnBounds();
+        clearScreen();
         encounter(map[userRow][userColumn]);
         break;
       default:
@@ -427,5 +377,4 @@ public class Sarz {
       break;
     }
   }
-
 }

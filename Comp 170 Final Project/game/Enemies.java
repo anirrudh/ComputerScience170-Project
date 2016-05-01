@@ -33,34 +33,16 @@ public class Enemies extends Sarz{
   /** Making enemy types here that can be picked from randomly in Sarz**/
   public void generateEnemies(){
 
-    enemies[0] = new Enemies("DRAGON", 100.00, 100.00, "Cave");
-    enemies[1] = new Enemies("SATURN FLY TRAP", 10.00, 15.00, "Forest");
-    enemies[2] = new Enemies("ICE APE", 50.00, 40.00, "Snow Region");
-    enemies[3] = new Enemies("RED SPOTTED PYTHON", 25.00, 50.00, "Grassland");
-    enemies[4] = new Enemies("SWARM OF BLUE HORNETS", 15.00, 15.00, "Forest");
-    enemies[5] = new Enemies("NEEDLE CAT", 35.00, 30.00, "Grassland");
-    enemies[6] = new Enemies("SAKAI", 20.00, 10.00, "Snow Region");
-    enemies[7] = new Enemies("SWINGING SQUIRREL", 25.00, 30.00, "Forest");
-    enemies[8] = new Enemies("FLYING PENGUIN", 40.00, 30.00, "Snow Region");
-
-
-
-    /*
-
-    enemies[0].setEnemyImage("dragonCave.gif");
-    enemies[1].setEnemyImage("trapForest.png");
-    enemies[2].setEnemyImage("apeSnowy.png");
-    enemies[3].setEnemyImage("snakePlains.png");
-    enemies[4].setEnemyImage("hornetsForest.png");
-    enemies[5].setEnemyImage("catPlains.png");
-    enemies[6].setEnemyImage("sakaiSnowy.png");
-    enemies[7].setEnemyImage("squirrelForest.png");
-    enemies[8].setEnemyImage("flyingSnowy.png");
-    */
-
+    enemies[0] = new Enemies("DRAGON", 100.00, 100.00, "CAVE");
+    enemies[1] = new Enemies("SATURN FLY TRAP", 10.00, 15.00, "FOREST");
+    enemies[2] = new Enemies("ICE APE", 50.00, 40.00, "TUNDRA");
+    enemies[3] = new Enemies("RED SPOTTED PYTHON", 25.00, 50.00, "GRASSLAND");
+    enemies[4] = new Enemies("SWARM OF BLUE HORNETS", 15.00, 15.00, "FOREST");
+    enemies[5] = new Enemies("NEEDLE CAT", 35.00, 30.00, "GRASSLAND");
+    enemies[6] = new Enemies("SAKAI", 20.00, 10.00, "TUNDRA");
+    enemies[7] = new Enemies("SWINGING SQUIRREL", 25.00, 30.00, "FOREST");
+    enemies[8] = new Enemies("FLYING PENGUIN", 40.00, 30.00, "TUNDRA");
   }
-
-
 
   public Enemies[] getEnemies(){
     return enemies;
@@ -79,37 +61,36 @@ this.enemyImage = enemyImage;
 }
 */
 
-public String getEnemyName() {
-  return enemyName;
-}
+  public String getEnemyName() {
+    return enemyName;
+  }
 
-public void setEnemyName(String enemyName) {
-  this.enemyName = enemyName;
-}
+  public void setEnemyName(String enemyName) {
+    this.enemyName = enemyName;
+  }
 
 
-public double getEnemyHealth() {
+  public double getEnemyHealth() {
+    return enemyHealth;
+  }
 
-  return enemyHealth;
-}
+  public void setEnemyHealth(double enemyHealth) {
+    this.enemyHealth = enemyHealth;
+  }
 
-public void setEnemyHealth(double enemyHealth) {
-  this.enemyHealth = enemyHealth;
-}
+  public double getEnemyHitPoints() {
+    return enemyHitPoints;
+  }
 
-public double getEnemyHitPoints() {
-  return enemyHitPoints;
-}
+  public void setEnemyHitPoints(double enemyHitPoints) {
+    this.enemyHitPoints = enemyHitPoints;
+  }
 
-public void setEnemyHitPoints(double enemyHitPoints) {
-  this.enemyHitPoints = enemyHitPoints;
-}
+  public String getEnemyLocation() {
+    return enemyLocation;
+  }
 
-public String getEnemyLocation() {
-  return enemyLocation;
-}
-
-public void setEnemyLocation(String enemyLocation) {
-  this.enemyLocation = enemyLocation;
-}
+  public void setEnemyLocation(String enemyLocation) {
+    this.enemyLocation = enemyLocation;
+  }
 }

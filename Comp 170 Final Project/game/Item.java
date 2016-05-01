@@ -27,7 +27,7 @@ public class Item extends Sarz{
 
   private enum Biomes{
 
-    FOREST("FOREST"), SNOWREGION("SNOW REGION"), GRASSLAND("GRASSLAND"), CAVE("CAVE");
+    FOREST("FOREST"), TUNDRA("TUNDRA"), GRASSLAND("GRASSLAND"), CAVE("CAVE");
 
     private String name;
 
@@ -42,7 +42,7 @@ public class Item extends Sarz{
 
   private enum UselessItems{
 
-    RUBBERBAND("RUBBER BAND"), ROCK("ROCK"), STICK("STICK"), NOTHING("NOTHING HERE");
+    NAIL("NAIL"), ROCK("ROCK"), STICK("STICK"), PENNY("PENNY");
 
     private String name;
 
@@ -66,7 +66,6 @@ public class Item extends Sarz{
     this.itemName = itemName;
     this.useful = useful;
     this.itemLocation = itemLocation;
-
   }
 
   public void generateItems(){
@@ -79,17 +78,14 @@ public class Item extends Sarz{
     for (int i = 0; i < 10; i++){
       uselessItems[i] = new Item((UselessItems.values()[r.nextInt(4)]).name(), 0, Biomes.values()[r.nextInt(3)].name());
     }
-
   }
 
   public String getItemName() {
       return itemName;
   }
-
   public void setItemName(String itemName) {
       this.itemName = itemName;
   }
-
   public String getItemLocation() {
     return itemLocation;
   }
@@ -102,6 +98,4 @@ public class Item extends Sarz{
   public void setUseful(int useful){
     this.useful = useful;
   }
-
-
 }

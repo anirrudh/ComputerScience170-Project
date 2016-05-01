@@ -2,11 +2,8 @@ import java.util.*;
 public class Main {
 
   public static void main(String[] args){
-    Sarz game = new Sarz();
-
+    Game game = new Game();
     game.premise();
     game.play();
-
   }
-
 }
