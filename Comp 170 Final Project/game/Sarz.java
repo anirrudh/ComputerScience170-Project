@@ -4,7 +4,16 @@ import java.io.File;
 import java.util.Scanner;
 import java.util.Random;
 import java.lang.Math;
-
+/**
+ * <h1> Sarz++, the 21st Century Text Adventure </h1>
+ * The Sarz class carries the bulk of the game, generating the actual functons which
+ * will be called. This class houses the actual "Map" of the game, in which we will
+ * make the player navigate.
+ * <p>
+ *
+ * @authors: Anirrudh Krishnan, Riley Clarkson, Zac Gallagher
+ * @version: beta 2.0
+ */
 public class Sarz {
 
   Scanner keyboard = new Scanner(System.in);
@@ -18,19 +27,27 @@ public class Sarz {
   private int userRow = 25;
   private int userColumn  = 25;
 
+
   public void clearScreen(){
     final String ANSI_CLS = "\u001b[2J";
     final String ANSI_HOME = "\u001b[H";
     System.out.print(ANSI_CLS + ANSI_HOME);
     System.out.flush();
   }
-
+  /**
+   * This method is used to see whether or not the player is going to navigate
+   * outside of the defined array, which if done could basically destroy the game.
+   * The method is called at the end of each and every move that the player inputs,
+   * and sees the integer value which the user is at. If it is too far, it does indeed
+   * give an error.
+   * @return the userRow is returned, which allows us to push the person back to the
+   * array that they were in. This, then, allows the user to input a different "Direction"
+   * from the location that they originally made the decision.
+   */
   public int checkRowBounds() {
         try {
-            //System.out.println("Checking here" + userRow);
             if(userRow == 50)
             {
-                //System.out.println(userRow);
                 System.out.println("Uh-oh, this looks like the end of the road. Try a differnt direction.");
                 userMoveIntro();
                 moveForward();
@@ -40,7 +57,6 @@ public class Sarz {
             }
             if(userRow <= 0)
             {
-                //System.out.println(userRow);
                 System.out.println("Uh-oh, this looks like the end of the road. Try a differnt direction.");
                 userMoveIntro();
                 moveForward();
@@ -59,6 +75,12 @@ public class Sarz {
             return userRow;
         }
     }
+  /**
+   * This method has the same theory as does the checkRowBounds(); method,
+   * but instead checks the columns.
+   * @return returns the userColumn value of the "previous state" of the column; exactly like the
+   * userRow but with columns.
+   */
   public int checkColumnBounds() {
         try
         {
@@ -89,7 +111,10 @@ public class Sarz {
         }
         return userColumn;
     }
-
+  /**
+   * This Method asks for the user's player name.
+   * @return userName, just returns the userName to be called elsewhere.
+   */
   public String setPlayerName() {
     Scanner playerNameKeyboard = new Scanner(System.in);
     user = new UserStats(playerNameKeyboard.next());
@@ -97,6 +122,10 @@ public class Sarz {
     System.out.println("\nYou're a brave one, " + user.getUserName() + "!");
     return user.getUserName();
   }
+  /**
+   * This method is invoked to clear anything that has been
+   * changed in the game to its original value.
+   */
   public void reset(){
     UserStats user = new UserStats();
     Sarz[][] map = new Sarz[50][50];
@@ -105,7 +134,12 @@ public class Sarz {
     userRow = 25;
     userColumn  = 25;
   }
-
+  /**
+   * This method generates the array in which the game takes place,
+   * and uses an array to dimensinoalize this. This then calls in other generate
+   * functions in order to gnerate Enimeies and Fruits at Random places on the map,
+   * allowing for a more dynamic game.
+   */
   public void mapGeneration() {
     int count = 0;
     int row;
@@ -160,6 +194,12 @@ public class Sarz {
       }
     }
   }
+  /**
+   * This method is a panel which reads in information between the two
+   * weapons.
+   * Then, it asks the user which one they want.
+   * @return returns user choice.
+   */
   public int getWeapon(){
     int userChoice = 0;
 
@@ -216,7 +256,11 @@ public class Sarz {
   }
   return userChoice;
   }
-
+  /**
+   * This function tells whether or not two objects are colliding
+   * with one another.
+   * @param array initiliazes object position in array
+   */
   public void encounter(Sarz array){
     if (array instanceof Item){
       System.out.println("\nYou are in a " + ((Item)array).getItemLocation() +  ".");
@@ -229,7 +273,11 @@ public class Sarz {
       enemyAttack(array);
     }
   }
-
+  /**
+   * This method tells the user when the key items needed to win the game are
+   * picked up.
+   * @param array initiliazes object position in array
+   */
   public void itemEncounter(Sarz array){
     Game g = new Game();
     Item i = new Item();
@@ -250,7 +298,13 @@ public class Sarz {
       moveForward();
     }
   }
-
+  /**
+   * This method tells the user any info needed about the enemy,
+   * including the enemy's HP, their name, and then tells the user
+   * whether their attempt to run away - or their HP after attacking -
+   * was sucessful or resulted in death, respectivley.
+   * @param array initiliazes battle position in array
+   */
   public void enemyAttack(Sarz array) {
     battleWin(array);
     if (user.getMachete() == true){
@@ -266,7 +320,12 @@ public class Sarz {
       System.out.println("\nThe enemy's health is: " + ((Enemies)array).getEnemyHealth());
       battleDialogue(array);
   }
-
+  /**
+   * This method checks who dies: you or the enemy, and the
+   * overall winner of the battle.
+   * @param array points to the array in which we need to pull the
+   * objects' attributes to check.
+   */
   public void battleWin(Sarz array){
     Game g = new Game();
     if (((Enemies)array).getEnemyHealth() <= 0){
@@ -279,7 +338,11 @@ public class Sarz {
       g.playAgain();
     }
   }
-
+  /**
+   * This method calculates the amount of damage done by the user
+   * to the enemy.
+   * @param array points to position in arry where this is going to take place .
+   */
   public void userAttack(Sarz array) {
     ((Enemies)array).setEnemyHealth((((Enemies)array).getEnemyHealth()-user.getHitPoints()));
     clearScreen();
@@ -289,7 +352,11 @@ public class Sarz {
     System.out.println("\nThe enemy's health is: " + ((Enemies)array).getEnemyHealth());
     battleDialogue(array);
   }
-
+  /**
+   * This Method just brings a menu up of available options, and
+   * the dialogues associated with them, as wel as handling errors.
+   * @param array points to the action and the location in the array.
+   */
   public void battleDialogue(Sarz array){
     //int reloop = 0;
     boolean success  = false;
@@ -337,7 +404,10 @@ public class Sarz {
       }
     }
   }
-
+  /**
+   * This is the panel which prompts the user with the commands they can
+   * execute to move themselves.
+   */
   public void userMoveIntro() {
     Scanner inputStreamPrompt = null;
     try
@@ -354,8 +424,9 @@ public class Sarz {
     }
     inputStreamPrompt.close();
   }
-
-
+  /**
+   * This method does the computation to move in whichever direction your heart desires.
+   */
   public void moveForward() {
     String KM = null;
 
@@ -398,7 +469,10 @@ public class Sarz {
       break;
     }
   }
-
+  /**
+   * This method checks if a user won by asking the program
+   * whether the rquitements to win were fufilled.
+   */
   public void checkForWin(){
     if ((plantCount == 2) && (waterCount ==1)) {
       Game g = new Game();

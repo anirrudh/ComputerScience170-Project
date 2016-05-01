@@ -1,10 +1,10 @@
-/**
-* Created by Zack on 4/24/2016.
-*/
 import java.util.*;
 import java.lang.*;
-
-
+/**
+ * This class extends Sarz and stores the enemies so that they can
+ * be pulled into teh program.
+ * @authors: Riley Clarkson, Anirrudh Krishnan, Zac Gallagher
+ */
 public class Enemies extends Sarz{
 
   private String enemyName;
@@ -22,7 +22,14 @@ public class Enemies extends Sarz{
     enemies = new Enemies[9];
 
   }
-
+  /**
+   * initializes enemies
+   * @param   enemyName type String
+   * @param   enemyHealth type double
+   * @param   enemyHitPoints type double
+   * @param   enemyLocation type String
+   * @return  initialize values to this class
+   */
   public Enemies(String enemyName, double enemyHealth, double enemyHitPoints, String enemyLocation) {
     this.enemyName = enemyName;
     this.enemyHealth = enemyHealth;
@@ -30,7 +37,8 @@ public class Enemies extends Sarz{
     this.enemyLocation = enemyLocation;
 
   }
-  /** Making enemy types here that can be picked from randomly in Sarz**/
+  /** Making enemy types here that can be picked from randomly in Sarz
+   */
   public void generateEnemies(){
 
     enemies[0] = new Enemies("DRAGON", 100.00, 100.00, "CAVE");
@@ -43,7 +51,9 @@ public class Enemies extends Sarz{
     enemies[7] = new Enemies("SWINGING SQUIRREL", 25.00, 30.00, "FOREST");
     enemies[8] = new Enemies("FLYING PENGUIN", 40.00, 30.00, "TUNDRA");
   }
-
+  /**
+   * Setters and Getters are all below here.
+   */
   public Enemies[] getEnemies(){
     return enemies;
   }
@@ -51,15 +61,6 @@ public class Enemies extends Sarz{
   public void setEnemies(Enemies[] enemiesArray){
     enemies = enemiesArray;
   }
-  /*
-  public String getEnemyImage() {
-  return enemyImage;
-}
-
-public void setEnemyImage(String enemyImage) {
-this.enemyImage = enemyImage;
-}
-*/
 
   public String getEnemyName() {
     return enemyName;

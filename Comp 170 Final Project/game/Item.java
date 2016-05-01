@@ -1,5 +1,8 @@
 import java.util.Random;
-
+/**
+ * This class defines and intizlizes the plants on the board.
+ * @authors: Riley Clarkson, Anirrudh Krishnan, Zac Gallagher
+ */
 public class Item extends Sarz{
 
   private String itemName;
@@ -9,7 +12,9 @@ public class Item extends Sarz{
   Item[] plants;
   Item[] water;
   Item[] uselessItems;
-
+  /**
+   * Enumarated values tell the items where to go in the array.
+   */
   private enum Plants{
 
     MANGO("MANGO"), PEACH("PEACH"), BANANA("BANANA"), APPLE("APPLE"), ORANGE("ORANGE"), LEMON("LEMON");
@@ -54,20 +59,31 @@ public class Item extends Sarz{
       return name;
     }
   }
-
+  /**
+   * Item intializes the item amounts in the array.
+   * @return all values.
+   */
   public Item(){
     itemName = null;
     plants = new Item[6];
     water = new Item[1];
     uselessItems = new Item[11];
   }
-
+  /**
+   * Initialize item variables to use function.
+   * @param   itemName type String
+   * @param   useful type int
+   * @param  itemLocation type String
+   * @return  values
+   */
   public Item(String itemName, int useful, String itemLocation){
     this.itemName = itemName;
     this.useful = useful;
     this.itemLocation = itemLocation;
   }
-
+  /**
+   * Generate the items here in this method
+   */
   public void generateItems(){
     for (int i = 0; i < 5; i++){
       plants[i] = new Item((Plants.values()[r.nextInt(5)]).name(), 2, Biomes.values()[r.nextInt(3)].name());
@@ -79,7 +95,9 @@ public class Item extends Sarz{
       uselessItems[i] = new Item((UselessItems.values()[r.nextInt(4)]).name(), 0, Biomes.values()[r.nextInt(3)].name());
     }
   }
-
+  /**
+   * Setters and Getters
+   */
   public String getItemName() {
       return itemName;
   }

@@ -6,7 +6,11 @@ public class Game {
   Sarz s = new Sarz();
 
   Scanner keyboard = new Scanner(System.in);
-
+  /**
+   * This method first reads in a text file in which the introduction for the game exists.
+   * It then calls in the method writeOutput(); during which it calls upon other methods as
+   * well.
+   */
   public void premise(){
     s.clearScreen();
     Scanner inputStream = null;
@@ -25,13 +29,19 @@ public class Game {
     inputStream.close();
     writeOutput();
   }
-
+  /**
+   * This method simply invokes other methods and is summoned in the Main function.
+   */
   public void play(){
     s.mapGeneration();
     s.userMoveIntro();
     s.moveForward();
   }
-
+  /**
+   * This method first invokes setPlayerName, which asks the player for their name.
+   * This is followed by offering them [the player] one of the items to enhance their
+   * experience through the game.
+   */
   public void writeOutput() {
     s.setPlayerName();
     System.out.println("\nYou have the choice between taking two items to help you on your journey: \n");
@@ -39,7 +49,9 @@ public class Game {
     System.out.println("");
     s.getWeapon();
   }
-
+  /**
+   * This method just calls reset, and then proceeds to execute main.
+   */
   public void playAgain(){
     System.out.println("Would you like to play again?");
     System.out.println("Enter 1 for YES or 2 for NO.");

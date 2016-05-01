@@ -1,4 +1,8 @@
-
+/**
+ * This method will store all of the UserStats that are input throughout the game
+ * and will be called upon to feed it back in.
+ * @authors: Anirrudh Krishnan, Riley Clarkson, Zac Gallagher
+ */
 public class UserStats {
 
   String userName;
@@ -10,7 +14,10 @@ public class UserStats {
   private int hours;
   private boolean weaponChoice;
   private double hitPoints;
-
+  /**
+   * initializes all values in this method.
+   * @return initialized values
+   */
   public UserStats(){
     userName = null;
     decision = null;
@@ -20,7 +27,14 @@ public class UserStats {
     day = 0;
     hour = 0;
   }
-
+  /**
+   * This sets the default things that the user will start with,
+   * including the Health and the Damage that they can do.
+   * @param  userName takes in a String
+   * @return          values
+   *
+   * Everything under this function is either a setter or a getter.
+   */
   public UserStats(String userName){
     this.userName = userName;
     decision = null;
@@ -29,12 +43,17 @@ public class UserStats {
     day = 1;
     hour = 1;
   }
+  /**
+   * Setters and Getters follow under!
+   */
   public double getHitPoints() {
     return hitPoints;
   }
+
   public String getUserName(){
     return userName;
   }
+
   public String getDecision(){
     return decision;
   }
@@ -42,18 +61,23 @@ public class UserStats {
   public double getHP(){
     return hp;
   }
+
   public int getDay(){
     return day;
   }
+
   public int getHour(){
     return hour;
   }
+
   public void setHitPoints(double hitPoints){
     this.hitPoints = hitPoints;
   }
+
   public void setUserName(String userName){
     this.userName = userName;
   }
+
   public void setDecision(String decision){
     this.decision = decision;
   }
@@ -61,15 +85,17 @@ public class UserStats {
   public void setHP(double hp){
     this.hp = hp;
   }
+
   public void setDay(int day){
     this.day = day;
   }
+
   public void setHour(int hour){
     this.hour = hour;
   }
+
   public double setMedicine() {
     setHP(getHP() + 30.00);
-    //System.out.println(hp);
     return hp;
   }
 
@@ -79,17 +105,4 @@ public class UserStats {
   public boolean getMachete(){
     return weaponChoice;
   }
-
-  public int Time()
-  {
-
-    boolean playerMoveTime;
-    playerMoveTime = false;
-    if (playerMoveTime = true)
-    {
-      hours = hours + 1;
-    }
-    return hours;
-  }
-
 }
