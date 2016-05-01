@@ -190,6 +190,7 @@ public class Sarz {
   }
 
   public void enemyAttack(Sarz array) {
+    battleWin(array);
     if (user.getMachete() == true){
       user.setHP((user.getHP())-(((Enemies)array).getEnemyHitPoints() * .5));
       System.out.println("The " + ((Enemies)array).getEnemyName() + " has inflicted " + (((Enemies)array).getEnemyHitPoints()*.5) + " damage!");
@@ -198,14 +199,23 @@ public class Sarz {
       user.setHP((user.getHP())-((Enemies)array).getEnemyHitPoints());
       System.out.println("The " + ((Enemies)array).getEnemyName() + " has inflicted " + ((Enemies)array).getEnemyHitPoints() + " damage!");
       }
+      battleWin(array);
       System.out.println("\nYour health is: " + user.getHP());
       System.out.println("\nThe enemy's health is: " + ((Enemies)array).getEnemyHealth());
       battleDialogue(array);
+  }
+  public void battleWin(Sarz array){
+    if (((Enemies)array).getEnemyHealth() < 0){
+      System.out.println("You killed the " + ((Enemies)array).getEnemyName() + "!");
+      userMoveIntro();
+      moveForward();
+    }
   }
 
   public void userAttack(Sarz array) {
     ((Enemies)array).setEnemyHealth((((Enemies)array).getEnemyHealth()-user.getHitPoints()));
     System.out.println("You inflicted " + user.getHitPoints() + " damage!");
+    battleWin(array);
     System.out.println("\nYour health is: " + user.getHP());
     System.out.println("\nThe enemy's health is: " + ((Enemies)array).getEnemyHealth());
     battleDialogue(array);
