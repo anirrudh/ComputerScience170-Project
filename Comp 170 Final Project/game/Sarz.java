@@ -10,7 +10,6 @@ public class Sarz {
   Scanner keyboard = new Scanner(System.in);
   Random r = new Random();
   UserStats user = new UserStats();
-  //UserNavigation n = new UserNavigation();
   Sarz[][] map = new Sarz[5][5];
 
   /** Reads in introduction text and asks for username.**/
@@ -34,10 +33,11 @@ public class Sarz {
   }
 
   public void play(){
+    UserNavigation n = new UserNavigation();
     mapGeneration();
-    encounter(map[4][4]);
-    //n.userMoveIntro();
-    //n.moveForward();
+    //encounter(map[4][4]);
+    n.userMoveIntro();
+    n.moveForward();
   }
     //enemyEncounter(map[0][0]);
 
@@ -67,7 +67,7 @@ public class Sarz {
     Enemies e = new Enemies();
     e.generateEnemies();
     //This generates enemies
-    while (count < 5){
+    while (count < 8){
       row = r.nextInt(5);
       column = r.nextInt(5);
       if (map[row][column] == null){
@@ -103,7 +103,7 @@ public class Sarz {
     }
     //This generates useless items
     count = 0;
-    while(count < 10){
+    while(count < 7){
       row = r.nextInt(5);
       column = r.nextInt(5);
       if (map[row][column] == null){
@@ -115,8 +115,7 @@ public class Sarz {
   }
   /*This is simply the write output function so the code is streamlined*/
   /*This is where we ask the user about what their "ability" will be*/
-  public int getWeapon()
-  {
+  public int getWeapon(){
     int userChoice = 0;
 
     Scanner userInput = new Scanner(System.in);
@@ -159,31 +158,58 @@ public class Sarz {
   }
 
   public void encounter(Sarz array){
-
+    System.out.println(array);
     if (array instanceof Item){
     System.out.println("You have encountered a " + ((Item)array).getItemName());
     }
     else if (array instanceof Enemies){
     System.out.println("You have encountered a " + ((Enemies)array).getEnemyName() + "\n\nTime to battle!" );
-    battle(array);
+    enemyAttack(array);
     }
   }
 
-
-
-  public void battle(Sarz array) {
+  public void enemyAttack(Sarz array) {
     if (user.getMachete() == true){
       user.setHP((user.getHP())-(((Enemies)array).getEnemyHitPoints() * .5));
       System.out.println("The " + ((Enemies)array).getEnemyName() + " has inflicted " + (((Enemies)array).getEnemyHitPoints()*.5) + " damage!");
-
     }
     else {
-    user.setHP((user.getHP())-((Enemies)array).getEnemyHitPoints());
-    System.out.println("The " + ((Enemies)array).getEnemyName() + " has inflicted " + ((Enemies)array).getEnemyHitPoints() + " damage!");
-    }
-    System.out.println("\nYour health is: " + user.getHP());
-
-
-
+      user.setHP((user.getHP())-((Enemies)array).getEnemyHitPoints());
+      System.out.println("The " + ((Enemies)array).getEnemyName() + " has inflicted " + ((Enemies)array).getEnemyHitPoints() + " damage!");
+      }
+      System.out.println("\nYour health is: " + user.getHP());
+      System.out.println("\nThe enemy's health is: " + ((Enemies)array).getEnemyHealth());
+      battleDialogue(array);
   }
+
+  public void userAttack(Sarz array) {
+    ((Enemies)array).setEnemyHealth((((Enemies)array).getEnemyHealth()-user.getHitPoints()));
+    System.out.println("You inflicted " + user.getHitPoints() + " damage!");
+    System.out.println("\nYour health is: " + user.getHP());
+    System.out.println("\nThe enemy's health is: " + ((Enemies)array).getEnemyHealth());
+    battleDialogue(array);
+  }
+
+  public void battleDialogue(Sarz array){
+
+    int decision = 0;
+
+    System.out.println("\nPlease enter:");
+    System.out.println("\n1 to attack");
+    System.out.println("2 to run away\n");
+
+    decision = keyboard.nextInt();
+
+    switch (decision) {
+
+      case 1:
+            userAttack(array);
+            enemyAttack(array);
+            break;
+      case 2:
+            //use randomizer to either battle or send user to choose where to go w/ nav function
+            break;
+    }
+  }
+
 }
