@@ -50,7 +50,7 @@ public class Sarz {
     System.out.println("\nLet's begin this adventure!");
 
   }
-    public int checkRowBounds()
+  public int checkRowBounds()
     {
         try {
             //System.out.println("Checking here" + userRow);
@@ -75,7 +75,7 @@ public class Sarz {
             return userRow;
         }
     }
-    public int checkColumnBounds()
+  public int checkColumnBounds()
 
     {
         try
@@ -88,14 +88,7 @@ public class Sarz {
                 userColumn = 4;
                 System.out.println(userColumn);
             }
-            else if(userColumn == 0)
-            {
-                System.out.println("Hey! You've reached the end of the road here. \n Looks like you'll have to find another way around.");
-                userMoveIntro();
-                moveForward();
-                userColumn = 0;
-                System.out.println(userColumn);
-            }
+
         }
         catch(ArrayIndexOutOfBoundsException err)
         {
@@ -115,7 +108,43 @@ public class Sarz {
     System.out.println("You are a brave one, " + user.getUserName() + ", welcome to the Sarz mission.");
     return user.getUserName();
   }
+  public void reset(){
+    UserStats user = new UserStats();
+    Sarz[][] map = new Sarz[5][5];
+    plantCount = 0;
+    waterCount = 0;
+    userRow = 0;
+    userColumn  = 0;
+  }
+  public void playAgain(){
+    System.out.println("Would you like to play again?");
+    System.out.println("Enter 1 for YES or 2 for NO.");
+    int playChoice = 0;
+    playChoice = keyboard.nextInt();
+    switch (playChoice) {
+      case 1:
+        reset();
+        play();
+        break;
+      case 2:
+        System.out.println("Thanks for visiting Sarz++.");
+        System.exit(0);
+        break;
+      default:
+        System.out.println("Please enter 1 or 2.");
+        playAgain();
+        break;
+    }
+  }
+  public void checkForWin(){
+    if ((plantCount == 1) && (waterCount ==1)) {
+      System.out.println("Congratulations! The water and plant you found are the signs needed that Sarz is inhabitable.");
+      System.out.println("You have to head back to Earth now and let your planet know there's more out there.");
+      System.out.println("\nThanks for playing Sarz++.");
+      playAgain();
+    }
 
+   }
   public void mapGeneration() {
     int count = 0;
     int row;
@@ -124,12 +153,12 @@ public class Sarz {
     Enemies e = new Enemies();
     e.generateEnemies();
     //This generates enemies
-    while (count < 8){
+    while (count < 9){
       row = r.nextInt(5);
       column = r.nextInt(5);
       if (map[row][column] == null){
         map[row][column] = e.enemies[r.nextInt(8)];
-        System.out.println(((Enemies)map[row][column]).getEnemyName() + " at " + row + "," + column);
+        //System.out.println(((Enemies)map[row][column]).getEnemyName() + " at " + row + "," + column);
         count++;
       }
     }
@@ -143,18 +172,18 @@ public class Sarz {
       column = r.nextInt(5);
       if (map[row][column] == null){
         map[row][column] = itemGenerator.plants[r.nextInt(5)];
-        System.out.println(((Item)map[row][column]).getItemName() + " at " + row + "," + column);
+        //System.out.println(((Item)map[row][column]).getItemName() + " at " + row + "," + column);
         count++;
       }
     }
     //This generates water
     count = 0;
-    while(count < 4){
+    while(count < 3){
       row = r.nextInt(5);
       column = r.nextInt(5);
       if (map[row][column] == null){
         map[row][column] = itemGenerator.water[0];
-        System.out.println(((Item)map[row][column]).getItemName() + " at " + row + "," + column);
+        //System.out.println(((Item)map[row][column]).getItemName() + " at " + row + "," + column);
         count ++;
       }
     }
@@ -165,7 +194,7 @@ public class Sarz {
       column = r.nextInt(5);
       if (map[row][column] == null){
         map[row][column] = itemGenerator.uselessItems[r.nextInt(10)];
-        System.out.println(((Item)map[row][column]).getItemName() + " at " + row + "," + column);
+        //System.out.println(((Item)map[row][column]).getItemName() + " at " + row + "," + column);
         count ++;
       }
     }
@@ -225,27 +254,30 @@ public class Sarz {
 
   public void encounter(Sarz array){
     if (array instanceof Item){
-      System.out.println("You have encountered a " + ((Item)array).getItemName());
+      System.out.println("\nYou have encountered a " + ((Item)array).getItemName() + "\n");
       itemEncounter(array);
     }
     else if (array instanceof Enemies){
-      System.out.println("You have encountered a " + ((Enemies)array).getEnemyName() + "\n\nTime to battle!" );
+      System.out.println("\nYou have encountered a " + ((Enemies)array).getEnemyName() + "\n\nTime to battle!" );
       enemyAttack(array);
     }
   }
 
   public void itemEncounter(Sarz array){
     Item i = new Item();
-    System.out.println(((Item)array).getUseful());
+    //System.out.println(((Item)array).getUseful());
     if (((Item)array).getUseful() == 2){
       System.out.println("Congratulations! This " + ((Item)array).getItemName() + " is a sign that Sarz++ may be inhabitable.");
       plantCount ++;
+      checkForWin();
       userMoveIntro();
       moveForward();
+
     }
     if (((Item)array).getUseful() == 1){
       System.out.println("Congratulations! This " + ((Item)array).getItemName() + " is a sign that Sarz++ may be inhabitable.");
       waterCount ++;
+      checkForWin();
       userMoveIntro();
       moveForward();
     }
@@ -272,10 +304,14 @@ public class Sarz {
       battleDialogue(array);
   }
   public void battleWin(Sarz array){
-    if (((Enemies)array).getEnemyHealth() < 0){
+    if (((Enemies)array).getEnemyHealth() <= 0){
       System.out.println("You killed the " + ((Enemies)array).getEnemyName() + "!");
       userMoveIntro();
       moveForward();
+    }
+    else if ((user.getHP()) <= 0){
+      System.out.println("The " + ((Enemies)array).getEnemyName() + " has killed you!\n");
+      playAgain();
     }
   }
 
