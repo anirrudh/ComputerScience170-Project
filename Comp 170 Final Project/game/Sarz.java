@@ -109,6 +109,7 @@ public class Sarz {
     return user.getUserName();
   }
   public void reset(){
+    System.out.println("Jesus has arrived.");
     UserStats user = new UserStats();
     Sarz[][] map = new Sarz[5][5];
     plantCount = 0;
@@ -124,14 +125,14 @@ public class Sarz {
     switch (playChoice) {
       case 1:
         reset();
-        play();
+        Main.main(new String[0]);
         break;
       case 2:
         System.out.println("Thanks for visiting Sarz++.");
         System.exit(0);
         break;
       default:
-        System.out.println("Please enter 1 or 2.");
+        System.out.println("Invalid input. Please enter a valid choice.");
         playAgain();
         break;
     }
@@ -325,15 +326,20 @@ public class Sarz {
   }
 
   public void battleDialogue(Sarz array){
-
+    //int reloop = 0;
+    boolean success  = false;
+    int count = 0;
+    int MAX_TRIES = 2;
+    while(!success && count++ < MAX_TRIES)
+    {
     int decision = 0;
-
+    //Sarz redoBattle = new Sarz();
     System.out.println("\nPlease enter:");
     System.out.println("\n1 to attack");
     System.out.println("2 to run away\n");
 
-    decision = keyboard.nextInt();
-
+    try {
+      decision = keyboard.nextInt();
     switch (decision) {
 
       case 1:
@@ -349,11 +355,22 @@ public class Sarz {
             else {
               System.out.println("You couldn't escape!");
               enemyAttack(array);
+
             }
             break;
     }
+    success = true;
   }
 
+  catch (InputMismatchException e)
+  {
+    System.out.println("You didn't enter a vaild number...try again.");
+    //success = true;
+    //Sarz.battleDialogue(Sarz array);
+    //reloop++;
+  }
+}
+}
   public void userMoveIntro() {
     Scanner inputStreamPrompt = null; //Use the scanner to read the files in.
     //This is where we will ask the user which directinon they would like to move in.
