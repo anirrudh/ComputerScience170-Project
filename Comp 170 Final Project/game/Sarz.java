@@ -11,6 +11,10 @@ public class Sarz {
   Random r = new Random();
   UserStats user = new UserStats();
   Sarz[][] map = new Sarz[5][5];
+  private int plantCount = 0;
+  private int waterCount = 0;
+  int userRow = 0;
+  int userColumn  = 0;
 
   /** Reads in introduction text and asks for username.**/
   public void premise(){
@@ -33,15 +37,10 @@ public class Sarz {
   }
 
   public void play(){
-    UserNavigation n = new UserNavigation();
     mapGeneration();
-    //encounter(map[4][4]);
-    n.userMoveIntro();
-    n.moveForward();
+    userMoveIntro();
+    moveForward();
   }
-    //enemyEncounter(map[0][0]);
-
-
   public void writeOutput() {
     setPlayerName();
     System.out.println("You have the choice between taking two items to help you on your journey: \n");
@@ -158,13 +157,35 @@ public class Sarz {
   }
 
   public void encounter(Sarz array){
-    System.out.println(array);
     if (array instanceof Item){
-    System.out.println("You have encountered a " + ((Item)array).getItemName());
+      System.out.println("You have encountered a " + ((Item)array).getItemName());
+      itemEncounter(array);
     }
     else if (array instanceof Enemies){
-    System.out.println("You have encountered a " + ((Enemies)array).getEnemyName() + "\n\nTime to battle!" );
-    enemyAttack(array);
+      System.out.println("You have encountered a " + ((Enemies)array).getEnemyName() + "\n\nTime to battle!" );
+      enemyAttack(array);
+    }
+  }
+
+  public void itemEncounter(Sarz array){
+    Item i = new Item();
+    System.out.println(((Item)array).getUseful());
+    if (((Item)array).getUseful() == 2){
+      System.out.println("Congratulations! This " + ((Item)array).getItemName() + " is a sign that Sarz++ may be inhabitable.");
+      plantCount ++;
+      userMoveIntro();
+      moveForward();
+    }
+    if (((Item)array).getUseful() == 1){
+      System.out.println("Congratulations! This " + ((Item)array).getItemName() + " is a sign that Sarz++ may be inhabitable.");
+      waterCount ++;
+      userMoveIntro();
+      moveForward();
+    }
+    else {
+      System.out.println("This won't help you on your mission.");
+      userMoveIntro();
+      moveForward();
     }
   }
 
@@ -207,8 +228,62 @@ public class Sarz {
             enemyAttack(array);
             break;
       case 2:
-            //use randomizer to either battle or send user to choose where to go w/ nav function
+            if (r.nextInt(10) > 5){
+              System.out.println("You managed to escape!\n");
+              userMoveIntro();
+              moveForward();
+            }
+            else {
+              System.out.println("You couldn't escape!");
+              enemyAttack(array);
+            }
             break;
+    }
+  }
+
+  public void userMoveIntro() {
+    Scanner inputStreamPrompt = null; //Use the scanner to read the files in.
+    //This is where we will ask the user which directinon they would like to move in.
+    try
+    {
+      inputStreamPrompt = new Scanner(new File("Directions.txt"));
+    }
+    catch(FileNotFoundException e){
+      System.out.println("File not found. Did you pirate this game?");
+      System.exit(0);
+    }
+    while(inputStreamPrompt.hasNextLine()){
+      String prompt = inputStreamPrompt.nextLine();
+      System.out.println(prompt);
+    }
+    inputStreamPrompt.close();
+
+  }
+
+  public void moveForward() {
+    String KM = null;
+
+    Scanner keyMove = new Scanner(System.in);
+    KM = keyMove.nextLine().toUpperCase();
+    switch(KM)
+    {
+      case "W":
+        System.out.println("You're moving forward now. Into the dark.");
+        userRow = 1 + userRow;
+        encounter(map[userRow][userColumn]);
+        break;
+      case "A":
+        System.out.println("You're moving to the left now. It's cold.");
+        userColumn = userColumn + 1;
+        encounter(map[userRow][userColumn]);
+        break;
+      case "D":
+        System.out.println("You're moving to the right now. It's cold.");
+        userColumn= 1 + userColumn;
+        encounter(map[userRow][userColumn]);
+        break;
+      default:
+        System.out.println("This doesn't work, try again.");
     }
   }
 

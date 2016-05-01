@@ -4,6 +4,7 @@ public class Item extends Sarz{
 
   private String itemName;
   private String itemLocation;
+  private int useful;
   Random r = new Random();
   Item[] plants;
   Item[] water;
@@ -41,7 +42,7 @@ public class Item extends Sarz{
 
   private enum UselessItems{
 
-    RUBBERBAND("USELESS RUBBER BAND"), ROCK("USELESS ROCK"), STICK("USELESS STICK"), NOTHING("NOTHING HERE"), PIZZA("LEFTOVER GIORDANOS...MMM");
+    RUBBERBAND("RUBBER BAND"), ROCK("ROCK"), STICK("STICK"), NOTHING("NOTHING HERE");
 
     private String name;
 
@@ -61,21 +62,21 @@ public class Item extends Sarz{
     uselessItems = new Item[11];
   }
 
-  public Item(String itemName, String itemLocation){
-
+  public Item(String itemName, int useful, String itemLocation){
     this.itemName = itemName;
+    this.useful = useful;
 
   }
 
   public void generateItems(){
     for (int i = 0; i < 5; i++){
-      plants[i] = new Item((Plants.values()[r.nextInt(5)]).name(), Biomes.values()[r.nextInt(3)].name());
+      plants[i] = new Item((Plants.values()[r.nextInt(5)]).name(), 2, Biomes.values()[r.nextInt(3)].name());
     }
 
-    water[0] = new Item("WATER", Biomes.values()[r.nextInt(3)].name());
+    water[0] = new Item("WATER", 1, Biomes.values()[r.nextInt(3)].name());
 
     for (int i = 0; i < 10; i++){
-      uselessItems[i] = new Item((UselessItems.values()[r.nextInt(4)]).name(), Biomes.values()[r.nextInt(3)].name());
+      uselessItems[i] = new Item((UselessItems.values()[r.nextInt(4)]).name(), 0, Biomes.values()[r.nextInt(3)].name());
     }
 
   }
@@ -93,6 +94,12 @@ public class Item extends Sarz{
   }
   public void setItemLocation(String itemLocation){
     this.itemLocation = itemLocation;
+  }
+  public int getUseful() {
+    return useful;
+  }
+  public void setUseful(int useful){
+    this.useful = useful;
   }
 
 
