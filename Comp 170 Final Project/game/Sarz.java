@@ -10,13 +10,13 @@ public class Sarz {
   Scanner keyboard = new Scanner(System.in);
   Random r = new Random();
   UserStats user = new UserStats();
-  Sarz[][] map = new Sarz[5][5];
+  Sarz[][] map = new Sarz[50][50];
 
 
   int plantCount = 0;
   int waterCount = 0;
-  private int userRow = 0;
-  private int userColumn  = 0;
+  private int userRow = 25;
+  private int userColumn  = 25;
 
   public void clearScreen(){
     final String ANSI_CLS = "\u001b[2J";
@@ -24,17 +24,27 @@ public class Sarz {
     System.out.print(ANSI_CLS + ANSI_HOME);
     System.out.flush();
   }
-  
+
   public int checkRowBounds() {
         try {
             //System.out.println("Checking here" + userRow);
-            if(userRow == 5)
+            if(userRow == 50)
             {
                 //System.out.println(userRow);
                 System.out.println("Uh-oh, this looks like the end of the road. Try a differnt direction.");
                 userMoveIntro();
                 moveForward();
-                userRow = 4;
+                userRow = userRow - 1;
+                System.out.println(userRow);
+                return userRow;
+            }
+            if(userRow <= 0)
+            {
+                //System.out.println(userRow);
+                System.out.println("Uh-oh, this looks like the end of the road. Try a differnt direction.");
+                userMoveIntro();
+                moveForward();
+                userRow = userRow + 1;
                 System.out.println(userRow);
                 return userRow;
             }
@@ -52,19 +62,27 @@ public class Sarz {
   public int checkColumnBounds() {
         try
         {
-            if(userColumn == 5)
+            if(userColumn == 50)
             {
                 System.out.println("Hey! You've reached the end of the road here. \n Looks like you'll have to find another way around.");
                 userMoveIntro();
                 moveForward();
-                userColumn = 4;
+                userColumn = userColumn - 1;
+                System.out.println(userColumn);
+            }
+            if(userColumn <= 0)
+            {
+                System.out.println("Hey! You've reached the end of the road here. \n Looks like you'll have to find another way around.");
+                userMoveIntro();
+                moveForward();
+                userColumn = userColumn + 1;
                 System.out.println(userColumn);
             }
         }
         catch(ArrayIndexOutOfBoundsException err)
         {
             System.out.println("You can't keep going. It's the end of the road. Please choose a different direction.");
-            userColumn = userColumn - 1;
+            userColumn = 4;
             userMoveIntro();
             moveForward();
             return userColumn;
@@ -81,11 +99,11 @@ public class Sarz {
   }
   public void reset(){
     UserStats user = new UserStats();
-    Sarz[][] map = new Sarz[5][5];
+    Sarz[][] map = new Sarz[50][50];
     plantCount = 0;
     waterCount = 0;
-    userRow = 0;
-    userColumn  = 0;
+    userRow = 25;
+    userColumn  = 25;
   }
 
   public void mapGeneration() {
@@ -96,9 +114,9 @@ public class Sarz {
     Enemies e = new Enemies();
     e.generateEnemies();
     //This generates enemies
-    while (count < 9){
-      row = r.nextInt(5);
-      column = r.nextInt(5);
+    while (count < 1000){
+      row = r.nextInt(50);
+      column = r.nextInt(50);
       if (map[row][column] == null){
         map[row][column] = e.enemies[r.nextInt(8)];
         //System.out.println(((Enemies)map[row][column]).getEnemyName() + " at " + row + "," + column);
@@ -110,9 +128,9 @@ public class Sarz {
     itemGenerator.generateItems();
     //This generates plants
     count = 0;
-    while (count < 6){
-      row = r.nextInt(5);
-      column = r.nextInt(5);
+    while (count < 500){
+      row = r.nextInt(50);
+      column = r.nextInt(50);
       if (map[row][column] == null){
         map[row][column] = itemGenerator.plants[r.nextInt(5)];
         //System.out.println(((Item)map[row][column]).getItemName() + " at " + row + "," + column);
@@ -121,9 +139,9 @@ public class Sarz {
     }
     //This generates water
     count = 0;
-    while(count < 3){
-      row = r.nextInt(5);
-      column = r.nextInt(5);
+    while(count < 375){
+      row = r.nextInt(50);
+      column = r.nextInt(50);
       if (map[row][column] == null){
         map[row][column] = itemGenerator.water[0];
         //System.out.println(((Item)map[row][column]).getItemName() + " at " + row + "," + column);
@@ -132,9 +150,9 @@ public class Sarz {
     }
     //This generates useless items
     count = 0;
-    while(count < 7){
-      row = r.nextInt(5);
-      column = r.nextInt(5);
+    while(count < 625){
+      row = r.nextInt(50);
+      column = r.nextInt(50);
       if (map[row][column] == null){
         map[row][column] = itemGenerator.uselessItems[r.nextInt(10)];
         //System.out.println(((Item)map[row][column]).getItemName() + " at " + row + "," + column);
@@ -219,16 +237,12 @@ public class Sarz {
     if (((Item)array).getUseful() == 2){
       System.out.println("Congratulations! This " + ((Item)array).getItemName() + " is a sign that Sarz++ may be inhabitable.\n");
       plantCount ++;
-      g.checkForWin();
-      userMoveIntro();
-      moveForward();
+      checkForWin();
     }
     if (((Item)array).getUseful() == 1){
       System.out.println("Congratulations! This " + ((Item)array).getItemName() + " is a sign that Sarz++ may be inhabitable.\n");
       waterCount ++;
-      g.checkForWin();
-      userMoveIntro();
-      moveForward();
+      checkForWin();
     }
     else {
       System.out.println("This won't help you on your mission.\n");
@@ -341,6 +355,7 @@ public class Sarz {
     inputStreamPrompt.close();
   }
 
+
   public void moveForward() {
     String KM = null;
 
@@ -350,21 +365,27 @@ public class Sarz {
     switch(KM)
     {
       case "W":
-        userRow = 1 + userRow;
+        userColumn = 1 + userColumn;
         checkRowBounds();
         checkColumnBounds();
         clearScreen();
         encounter(map[userRow][userColumn]);
         break;
       case "A":
-        userColumn = userColumn + 1;
+        userColumn = userRow - 1;
         checkRowBounds();
         checkColumnBounds();
         clearScreen();
         encounter(map[userRow][userColumn]);
         break;
+      case "S":
+        userColumn = userColumn -1;
+        checkRowBounds();
+        checkColumnBounds();
+        clearScreen();
+        encounter(map[userRow][userColumn]);
       case "D":
-        userColumn= 1 + userColumn;
+        userRow = userRow + 1;
         checkRowBounds();
         checkColumnBounds();
         clearScreen();
@@ -377,4 +398,18 @@ public class Sarz {
       break;
     }
   }
+
+  public void checkForWin(){
+    if ((plantCount == 2) && (waterCount ==1)) {
+      Game g = new Game();
+      System.out.println("The water and plants you found are the signs needed that Sarz is inhabitable.");
+      System.out.println("You have to head back to Earth now and let your planet know there's more out there.");
+      System.out.println("\nThanks for playing Sarz++.");
+      g.playAgain();
+    }
+    else {
+      userMoveIntro();
+      moveForward();
+    }
+   }
 }

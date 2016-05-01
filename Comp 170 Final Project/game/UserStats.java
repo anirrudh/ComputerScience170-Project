@@ -1,5 +1,4 @@
 
-
 public class UserStats {
 
   String userName;
@@ -26,7 +25,7 @@ public class UserStats {
     this.userName = userName;
     decision = null;
     hitPoints= 15.00;
-    hp = 100.00;
+    hp = 200.00;
     day = 1;
     hour = 1;
   }

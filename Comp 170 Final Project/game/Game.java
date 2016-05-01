@@ -60,13 +60,4 @@ public class Game {
         break;
     }
   }
-
-  public void checkForWin(){
-    if ((s.plantCount == 2) && (s.waterCount ==1)) {
-      System.out.println("The water and plants you found are the signs needed that Sarz is inhabitable.");
-      System.out.println("You have to head back to Earth now and let your planet know there's more out there.");
-      System.out.println("\nThanks for playing Sarz++.");
-      playAgain();
-    }
-   }
 }
