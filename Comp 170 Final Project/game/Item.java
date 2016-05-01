@@ -65,6 +65,7 @@ public class Item extends Sarz{
   public Item(String itemName, int useful, String itemLocation){
     this.itemName = itemName;
     this.useful = useful;
+    this.itemLocation = itemLocation;
 
   }
 

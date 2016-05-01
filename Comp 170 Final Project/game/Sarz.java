@@ -50,8 +50,7 @@ public class Sarz {
     System.out.println("\nLet's begin this adventure!");
 
   }
-  public int checkRowBounds()
-    {
+  public int checkRowBounds() {
         try {
             //System.out.println("Checking here" + userRow);
             if(userRow == 5)
@@ -75,9 +74,7 @@ public class Sarz {
             return userRow;
         }
     }
-  public int checkColumnBounds()
-
-    {
+  public int checkColumnBounds() {
         try
         {
             if(userColumn == 5)
@@ -105,11 +102,10 @@ public class Sarz {
   public String setPlayerName() {
     Scanner playerNameKeyboard = new Scanner(System.in);
     user = new UserStats(playerNameKeyboard.next());
-    System.out.println("You are a brave one, " + user.getUserName() + ", welcome to the Sarz mission.");
+    System.out.println("\nYou're a brave one, " + user.getUserName() + ", welcome to the Sarz mission.");
     return user.getUserName();
   }
   public void reset(){
-    System.out.println("Jesus has arrived.");
     UserStats user = new UserStats();
     Sarz[][] map = new Sarz[5][5];
     plantCount = 0;
@@ -138,8 +134,8 @@ public class Sarz {
     }
   }
   public void checkForWin(){
-    if ((plantCount == 1) && (waterCount ==1)) {
-      System.out.println("Congratulations! The water and plant you found are the signs needed that Sarz is inhabitable.");
+    if ((plantCount == 2) && (waterCount ==1)) {
+      System.out.println("The water and plants you found are the signs needed that Sarz is inhabitable.");
       System.out.println("You have to head back to Earth now and let your planet know there's more out there.");
       System.out.println("\nThanks for playing Sarz++.");
       playAgain();
@@ -221,44 +217,49 @@ public class Sarz {
     }
 
 
-    try
-    {
+    try {
       userChoice = userInput.nextInt();
-    switch (userChoice) {
-      case 1: System.out.println("\nMEDICINE will help you increase your Health Points by 300.");
-      System.out.println("");
-      getWeapon();
-      break;
-      case 2: System.out.println("\nYou chose the MEDICINE!");
-      user.setMachete(false);
-      user.setMedicine();
-      break;
-      case 3: System.out.println("\nThe MACHETE will cut all damage you take from enemies in half.");
-      getWeapon();
-      break;
-      case 4: System.out.println("\nYou chose the MACHETE!");
-      user.setMachete(true);
-      break;
-      default: System.out.println("\nInvalid input. Try again.");
-      getWeapon();
-      break;
+      switch (userChoice) {
+        case 1:
+          System.out.println("\nMEDICINE will help you increase your Health Points by 300.");
+          System.out.println("");
+          getWeapon();
+          break;
+        case 2:
+          System.out.println("\nYou chose the MEDICINE!");
+          user.setMachete(false);
+          user.setMedicine();
+          break;
+        case 3:
+          System.out.println("\nThe MACHETE will cut all damage you take from enemies in half.");
+          getWeapon();
+          break;
+        case 4:
+          System.out.println("\nYou chose the MACHETE!");
+          user.setMachete(true);
+          break;
+        default:
+          System.out.println("\nInvalid input. Try again.");
+          getWeapon();
+          break;
+        }
+      return userChoice;
     }
-    return userChoice;
-  }
-  catch (InputMismatchException e)
-  {
+  catch (InputMismatchException e) {
     System.out.println("You didn't enter a vaild number. Please enter a vaild number.");
     getWeapon();
   }
   return userChoice;
-  }
+}
 
   public void encounter(Sarz array){
     if (array instanceof Item){
-      System.out.println("\nYou have encountered a " + ((Item)array).getItemName() + "\n");
+      System.out.println("\nYou are in a " + ((Item)array).getItemLocation() +  ".");
+      System.out.println("\nThere is a " + ((Item)array).getItemName() + "!\n");
       itemEncounter(array);
     }
     else if (array instanceof Enemies){
+      System.out.println("\nYou are in a " + ((Enemies)array).getEnemyLocation() + ".");
       System.out.println("\nYou have encountered a " + ((Enemies)array).getEnemyName() + "\n\nTime to battle!" );
       enemyAttack(array);
     }
