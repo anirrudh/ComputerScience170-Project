@@ -55,14 +55,14 @@ public class Game {
   public void playAgain(){
     System.out.println("Would you like to play again?");
     System.out.println("Enter 1 for YES or 2 for NO.");
-    int playChoice = 0;
-    playChoice = keyboard.nextInt();
+    String playChoice = null;
+    playChoice = keyboard.nextLine();
     switch (playChoice) {
-      case 1:
+      case "1":
         s.reset();
         Main.main(new String[0]);
         break;
-      case 2:
+      case "2":
         System.out.println("Thanks for visiting Sarz++.");
         System.exit(0);
         break;
