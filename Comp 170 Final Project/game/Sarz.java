@@ -346,10 +346,9 @@ public class Sarz {
   public void userAttack(Sarz array) {
     ((Enemies)array).setEnemyHealth((((Enemies)array).getEnemyHealth()-user.getHitPoints()));
     clearScreen();
-    System.out.println("\nYou inflicted " + user.getHitPoints() + " damage!");
+    System.out.println("\nYou inflicted " + user.getHitPoints() + " damage!\n");
     battleWin(array);
-    System.out.println("\nYour health is: " + user.getHP());
-    System.out.println("\nThe enemy's health is: " + ((Enemies)array).getEnemyHealth());
+    enemyAttack(array);
     battleDialogue(array);
   }
   /**
@@ -443,7 +442,7 @@ public class Sarz {
         encounter(map[userRow][userColumn]);
         break;
       case "A":
-        userColumn = userRow - 1;
+        userRow = userRow - 1;
         checkRowBounds();
         checkColumnBounds();
         clearScreen();
@@ -474,7 +473,7 @@ public class Sarz {
    * whether the rquitements to win were fufilled.
    */
   public void checkForWin(){
-    if ((plantCount == 2) && (waterCount ==1)) {
+    if ((plantCount >= 5) && (waterCount >= 2)) {
       Game g = new Game();
       System.out.println("The water and plants you found are the signs needed that Sarz is inhabitable.");
       System.out.println("You have to head back to Earth now and let your planet know there's more out there.");

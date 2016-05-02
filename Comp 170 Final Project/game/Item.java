@@ -89,7 +89,7 @@ public class Item extends Sarz{
       plants[i] = new Item((Plants.values()[r.nextInt(5)]).name(), 2, Biomes.values()[r.nextInt(3)].name());
     }
 
-    water[0] = new Item("WATER", 1, Biomes.values()[r.nextInt(3)].name());
+    water[0] = new Item("LAKE", 1, Biomes.values()[r.nextInt(3)].name());
 
     for (int i = 0; i < 10; i++){
       uselessItems[i] = new Item((UselessItems.values()[r.nextInt(4)]).name(), 0, Biomes.values()[r.nextInt(3)].name());
