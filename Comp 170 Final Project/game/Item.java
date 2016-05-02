@@ -1,7 +1,7 @@
 import java.util.Random;
 /**
  * This class defines and intizlizes the plants on the board.
- * @authors: Riley Clarkson, Anirrudh Krishnan, Zac Gallagher
+ * @author: Riley Clarkson, Anirrudh Krishnan, Zac Gallagher
  */
 public class Item extends Sarz{
 
@@ -61,7 +61,6 @@ public class Item extends Sarz{
   }
   /**
    * Item intializes the item amounts in the array.
-   * @return all values.
    */
   public Item(){
     itemName = null;
@@ -74,7 +73,6 @@ public class Item extends Sarz{
    * @param   itemName type String
    * @param   useful type int
    * @param  itemLocation type String
-   * @return  values
    */
   public Item(String itemName, int useful, String itemLocation){
     this.itemName = itemName;
@@ -97,6 +95,7 @@ public class Item extends Sarz{
   }
   /**
    * Setters and Getters
+   * @return itemName; itemLocation; useful;
    */
   public String getItemName() {
       return itemName;

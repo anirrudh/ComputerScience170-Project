@@ -1,7 +1,7 @@
 import java.util.*;
 /**
  * This is the Main class which we will run to run the game.
- * @authors: Riley Clarkson, Anirrudh Krishnan, Zac Gallagher
+ * @author: Riley Clarkson, Anirrudh Krishnan, Zac Gallagher
  */
 public class Main {
 

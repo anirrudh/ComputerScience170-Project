@@ -1,7 +1,7 @@
 /**
  * This method will store all of the UserStats that are input throughout the game
  * and will be called upon to feed it back in.
- * @authors: Anirrudh Krishnan, Riley Clarkson, Zac Gallagher
+ * @author: Anirrudh Krishnan, Riley Clarkson, Zac Gallagher
  */
 public class UserStats {
 
@@ -16,7 +16,6 @@ public class UserStats {
   private double hitPoints;
   /**
    * initializes all values in this method.
-   * @return initialized values
    */
   public UserStats(){
     userName = null;
@@ -31,8 +30,6 @@ public class UserStats {
    * This sets the default things that the user will start with,
    * including the Health and the Damage that they can do.
    * @param  userName takes in a String
-   * @return          values
-   *
    * Everything under this function is either a setter or a getter.
    */
   public UserStats(String userName){
@@ -45,6 +42,7 @@ public class UserStats {
   }
   /**
    * Setters and Getters follow under!
+   * @return hitPoints; userName; decision; hp; day; hour;
    */
   public double getHitPoints() {
     return hitPoints;

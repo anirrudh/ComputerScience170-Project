@@ -11,7 +11,7 @@ import java.lang.Math;
  * make the player navigate.
  * <p>
  *
- * @authors: Anirrudh Krishnan, Riley Clarkson, Zac Gallagher
+ * @author: Anirrudh Krishnan, Riley Clarkson, Zac Gallagher
  * @version: beta 2.0
  */
 public class Sarz {

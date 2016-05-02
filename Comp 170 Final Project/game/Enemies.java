@@ -3,7 +3,7 @@ import java.lang.*;
 /**
  * This class extends Sarz and stores the enemies so that they can
  * be pulled into teh program.
- * @authors: Riley Clarkson, Anirrudh Krishnan, Zac Gallagher
+ * @author: Riley Clarkson, Anirrudh Krishnan, Zac Gallagher
  */
 public class Enemies extends Sarz{
 
@@ -28,7 +28,6 @@ public class Enemies extends Sarz{
    * @param   enemyHealth type double
    * @param   enemyHitPoints type double
    * @param   enemyLocation type String
-   * @return  initialize values to this class
    */
   public Enemies(String enemyName, double enemyHealth, double enemyHitPoints, String enemyLocation) {
     this.enemyName = enemyName;
@@ -53,6 +52,7 @@ public class Enemies extends Sarz{
   }
   /**
    * Setters and Getters are all below here.
+   * @return enemies; enemyName; enemyHealth; enemyHitPoints; enemyLocation;
    */
   public Enemies[] getEnemies(){
     return enemies;
